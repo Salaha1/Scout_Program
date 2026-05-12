@@ -104,9 +104,16 @@ body{font-family:var(--font-body);background:#eef2f8;color:var(--text);min-heigh
 [lang="ar"] .input-label{letter-spacing:0;font-size:11px;}
 .input-field{border:1px solid var(--gray2);border-radius:7px;padding:7px 10px;font-size:12.5px;color:var(--text);font-family:var(--font-body);transition:border .2s;background:var(--white);width:100%;}
 .input-field:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,111,181,.1);}
-.time-row{display:flex;align-items:center;gap:6px;}
+.time-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
 .time-sep{color:var(--text3);font-size:12px;font-weight:700;flex-shrink:0;}
-.input-field.time{max-width:110px;}
+.time-picker{display:flex;align-items:center;gap:4px;background:var(--white);border:1px solid var(--gray2);border-radius:7px;padding:4px 7px;transition:border .2s;}
+.time-picker:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,111,181,.1);}
+.tp-select{border:none;background:none;font-size:13px;font-weight:600;color:var(--text);font-family:var(--font-body);padding:2px 1px;cursor:pointer;outline:none;-webkit-appearance:none;appearance:none;text-align:center;width:32px;}
+.tp-select:focus{outline:none;}
+.tp-colon{font-size:13px;font-weight:700;color:var(--text2);}
+.tp-ampm{display:flex;border-radius:5px;overflow:hidden;border:1px solid var(--gray2);margin-inline-start:3px;}
+.tp-ampm-btn{border:none;background:var(--gray);color:var(--text3);font-size:11px;font-weight:700;padding:3px 7px;cursor:pointer;font-family:var(--font-body);transition:all .15s;line-height:1.4;}
+.tp-ampm-btn.active{background:var(--navy);color:#fff;}
 .full-col{grid-column:1/-1;}
 
 .empty-state{text-align:center;padding:3rem 1.5rem;color:var(--text3);background:var(--white);border-radius:var(--radius);border:2px dashed var(--gray2);}
@@ -473,8 +480,86 @@ function fmtDuration(min) {
   const h=Math.floor(min/60),m=min%60;
   return h+t.hrs+(m?` ${m}${t.min}`:'');
 }
+function fmt12(val24){
+  if(!val24) return '';
+  const {h,m,ampm}=parse24(val24);
+  return `${h}:${String(m).padStart(2,'0')} ${ampm}`;
+}
 function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
 function typeLabel(key){ const idx=T[lang].typeKeys.indexOf(key); return idx>=0?T[lang].types[idx]:key; }
+
+// ── TIME PICKER HELPERS ──
+function parse24(val){
+  if(!val) return {h:null,m:0,ampm:'AM'};
+  const [hh,mm]=val.split(':').map(Number);
+  const ampm=hh>=12?'PM':'AM';
+  const h12=hh===0?12:hh>12?hh-12:hh;
+  return {h:h12,m:mm,ampm};
+}
+function to24(h,m,ampm){
+  let hh=parseInt(h);
+  if(ampm==='AM'&&hh===12) hh=0;
+  else if(ampm==='PM'&&hh!==12) hh+=12;
+  return `${String(hh).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+}
+function buildTimePicker(id,slot,val24){
+  const {h,m,ampm}=parse24(val24);
+  const hrs=Array.from({length:12},(_,i)=>i+1);
+  const mins=['00','05','10','15','20','25','30','35','40','45','50','55'];
+  const hOpts=hrs.map(v=>`<option value="${v}" ${h===v?'selected':''}>${v}</option>`).join('');
+  const mOpts=mins.map(v=>`<option value="${v}" ${m===parseInt(v)&&val24?'selected':''}>${v}</option>`).join('');
+  return `<div class="time-picker" id="tp-${id}-${slot}">
+    <select class="tp-select" onchange="tpChange(${id},'${slot}')" id="tph-${id}-${slot}">${hOpts}</select>
+    <span class="tp-colon">:</span>
+    <select class="tp-select" style="width:36px" onchange="tpChange(${id},'${slot}')" id="tpm-${id}-${slot}">${mOpts}</select>
+    <div class="tp-ampm">
+      <button class="tp-ampm-btn ${ampm==='AM'?'active':''}" onclick="tpAmpm(${id},'${slot}','AM')">AM</button>
+      <button class="tp-ampm-btn ${ampm==='PM'?'active':''}" onclick="tpAmpm(${id},'${slot}','PM')">PM</button>
+    </div>
+  </div>`;
+}
+function tpChange(id,slot){
+  const h=document.getElementById(`tph-${id}-${slot}`).value;
+  const m=document.getElementById(`tpm-${id}-${slot}`).value;
+  const activeBtn=document.querySelector(`#tp-${id}-${slot} .tp-ampm-btn.active`);
+  const ampm=activeBtn?activeBtn.textContent:'AM';
+  const val=to24(h,m,ampm);
+  const field=slot==='start'?'startTime':'endTime';
+  updateField(id,field,val);
+  // update badge without full rerender
+  const a=activities.find(a=>a.id===id);
+  if(a){
+    const dur=calcDuration(a.startTime,a.endTime);
+    const badge=document.querySelector(`#card-${id} .card-time-badge`);
+    const header=document.querySelector(`#card-${id} .card-header`);
+    if(badge){ badge.textContent=`${fmt12(a.startTime)||''}${a.endTime?' – '+fmt12(a.endTime):''} ${dur?'· '+fmtDuration(dur):''}`.trim(); }
+    else if(a.startTime&&header){
+      const b=document.createElement('div');
+      b.className='card-time-badge';
+      b.textContent=`${fmt12(a.startTime)}${a.endTime?' – '+fmt12(a.endTime):''} ${dur?'· '+fmtDuration(dur):''}`.trim();
+      header.insertBefore(b,header.querySelector('.card-remove'));
+    }
+  }
+  updateSummary();
+}
+function tpAmpm(id,slot,val){
+  const h=document.getElementById(`tph-${id}-${slot}`).value;
+  const m=document.getElementById(`tpm-${id}-${slot}`).value;
+  const field=slot==='start'?'startTime':'endTime';
+  const time24=to24(h,m,val);
+  updateField(id,field,time24);
+  // toggle button style
+  document.querySelectorAll(`#tp-${id}-${slot} .tp-ampm-btn`).forEach(btn=>{
+    btn.classList.toggle('active', btn.textContent===val);
+  });
+  const a=activities.find(a=>a.id===id);
+  if(a){
+    const dur=calcDuration(a.startTime,a.endTime);
+    const badge=document.querySelector(`#card-${id} .card-time-badge`);
+    if(badge) badge.textContent=`${fmt12(a.startTime)||''}${a.endTime?' – '+fmt12(a.endTime):''} ${dur?'· '+fmtDuration(dur):''}`.trim();
+  }
+  updateSummary();
+}
 
 function renderActivities() {
   const list = document.getElementById('activitiesList');
@@ -493,7 +578,7 @@ function renderActivities() {
         <div class="card-drag" title="drag to reorder">⠿</div>
         <div class="card-num">${i+1}</div>
         <div class="card-title-text">${a.name?esc(a.name):`<span style="color:#aaa;font-weight:400">…</span>`}</div>
-        ${a.startTime?`<div class="card-time-badge">${a.startTime}${a.endTime?' – '+a.endTime:''} ${dur?'· '+fmtDuration(dur):''}</div>`:''}
+        ${a.startTime?`<div class="card-time-badge">${fmt12(a.startTime)}${a.endTime?' – '+fmt12(a.endTime):''} ${dur?'· '+fmtDuration(dur):''}</div>`:''}
         <button class="card-remove" onclick="removeActivity(${a.id})">×</button>
       </div>
       <div class="type-row">
@@ -508,12 +593,12 @@ function renderActivities() {
           <label class="input-label">${t.f_resp}</label>
           <input class="input-field" type="text" value="${esc(a.responsible)}" placeholder="${t.f_respPh}" oninput="updateField(${a.id},'responsible',this.value)"/>
         </div>
-        <div class="input-group">
+        <div class="input-group full-col">
           <label class="input-label">${t.f_time}</label>
           <div class="time-row">
-            <input class="input-field time" type="time" value="${a.startTime}" oninput="updateField(${a.id},'startTime',this.value);rerenderCard(${a.id})"/>
+            ${buildTimePicker(a.id,'start',a.startTime)}
             <span class="time-sep">→</span>
-            <input class="input-field time" type="time" value="${a.endTime}" oninput="updateField(${a.id},'endTime',this.value);rerenderCard(${a.id})"/>
+            ${buildTimePicker(a.id,'end',a.endTime)}
           </div>
         </div>
         <div class="input-group">
@@ -543,8 +628,8 @@ function updateSummary(){
   const starts=activities.filter(a=>a.startTime).map(a=>a.startTime).sort();
   const ends=activities.filter(a=>a.endTime).map(a=>a.endTime).sort();
   document.getElementById('statDuration').textContent=totalMin?fmtDuration(totalMin):'—';
-  document.getElementById('statStart').textContent=starts.length?starts[0]:'—';
-  document.getElementById('statEnd').textContent=ends.length?ends[ends.length-1]:'—';
+  document.getElementById('statStart').textContent=starts.length?fmt12(starts[0]):'—';
+  document.getElementById('statEnd').textContent=ends.length?fmt12(ends[ends.length-1]):'—';
 }
 
 // ── DRAG & DROP (desktop) ──
@@ -676,7 +761,7 @@ function generateSchedule(){
     const dur=calcDuration(a.startTime,a.endTime);
     const mats=(a.materials||'').split(',').map(s=>s.trim()).filter(Boolean);
     return `<tr>
-      <td><div class="time-col">${a.startTime||'—'}</div>${a.endTime?`<div class="time-col" style="color:#aaa">→ ${a.endTime}</div>`:''}${dur?`<div class="dur-tag">${fmtDuration(dur)}</div>`:''}</td>
+      <td><div class="time-col">${fmt12(a.startTime)||'—'}</div>${a.endTime?`<div class="time-col" style="color:#aaa">→ ${fmt12(a.endTime)}</div>`:''}${dur?`<div class="dur-tag">${fmtDuration(dur)}</div>`:''}</td>
       <td><div class="act-name">${esc(a.name)||'—'}${a.type?`<span class="act-pill pill-${a.type}">${typeLabel(a.type)}</span>`:''}</div></td>
       <td style="font-size:12.5px;color:var(--text2)">${esc(a.responsible)||'—'}</td>
       <td>${mats.length?mats.map(m=>`<span class="mat-tag">${esc(m)}</span>`).join(''):'<span style="color:#aaa">—</span>'}</td>
@@ -700,8 +785,8 @@ function generateSchedule(){
     </div>
     ${(totalMin||starts.length)?`<div class="sch-info-strip">
       ${totalMin?`<div class="sch-info-item">${t.infoTotal}: <b>${fmtDuration(totalMin)}</b></div>`:''}
-      ${starts.length?`<div class="sch-info-item">${t.infoStart}: <b>${starts[0]}</b></div>`:''}
-      ${ends.length?`<div class="sch-info-item">${t.infoEnd}: <b>${ends[ends.length-1]}</b></div>`:''}
+      ${starts.length?`<div class="sch-info-item">${t.infoStart}: <b>${fmt12(starts[0])}</b></div>`:''}
+      ${ends.length?`<div class="sch-info-item">${t.infoEnd}: <b>${fmt12(ends[ends.length-1])}</b></div>`:''}
       <div class="sch-info-item">${t.infoCount}: <b>${activities.length}</b></div>
     </div>`:''}
     <div class="sch-body">
