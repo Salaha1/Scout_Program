@@ -105,7 +105,10 @@ body{font-family:var(--font-body);background:#eef2f8;color:var(--text);min-heigh
 .input-field{border:1px solid var(--gray2);border-radius:7px;padding:7px 10px;font-size:12.5px;color:var(--text);font-family:var(--font-body);transition:border .2s;background:var(--white);width:100%;}
 .input-field:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,111,181,.1);}
 .time-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
-.time-sep{color:var(--text3);font-size:12px;font-weight:700;flex-shrink:0;}
+/* ── FIX 1: directional arrow – flips with dir ── */
+.time-sep{color:var(--text3);font-size:13px;font-weight:700;flex-shrink:0;}
+.time-sep::before{content:'→';}
+[dir="rtl"] .time-sep::before{content:'←';}
 .time-picker{display:flex;align-items:center;gap:4px;background:var(--white);border:1px solid var(--gray2);border-radius:7px;padding:4px 7px;transition:border .2s;}
 .time-picker:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,111,181,.1);}
 .tp-select{border:none;background:none;font-size:13px;font-weight:600;color:var(--text);font-family:var(--font-body);padding:2px 1px;cursor:pointer;outline:none;-webkit-appearance:none;appearance:none;text-align:center;width:32px;}
@@ -174,14 +177,79 @@ body{font-family:var(--font-body);background:#eef2f8;color:var(--text);min-heigh
 /* SCROLLBAR */
 ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:rgba(0,0,0,.14);border-radius:3px;}
 
-/* PRINT */
-@media print{
-  .app{display:block;}
-  .sidebar,.mobile-header,.page-header,.activities-list,.output-actions,#editorSection{display:none!important;}
-  #scheduleOutput{display:block!important;}
-  .schedule-card{box-shadow:none;border:none;}
-  .sch-header{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-  .main{padding:0;}
+/* ── FIX 2: Clean single-page PDF print ── */
+@media print {
+  /* Hide everything except the schedule card */
+  body > *,
+  .app,
+  .sidebar,
+  .mobile-header,
+  .mobile-overlay,
+  #editorSection,
+  .output-actions {
+    display: none !important;
+  }
+
+  /* Reset body for print */
+  body {
+    background: #fff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: 'Tajawal', 'DM Sans', Arial, sans-serif !important;
+  }
+
+  /* Pull the output section out of the grid and make it the only thing */
+  #scheduleOutput {
+    display: block !important;
+    position: fixed !important;
+    inset: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #fff !important;
+    z-index: 9999 !important;
+  }
+
+  #scheduleOutput .output-actions {
+    display: none !important;
+  }
+
+  /* The schedule card itself */
+  .schedule-card {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    width: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  /* Force colour printing */
+  .sch-header {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+  .sch-info-strip,
+  .act-pill,
+  .mat-tag,
+  .pill-game, .pill-learning, .pill-ceremony, .pill-break, .pill-other {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Compact table for single page */
+  .sch-body { padding: 0.8rem 1.2rem !important; }
+  .sch-header { padding: 1rem 1.2rem 0.8rem !important; }
+  .sch-info-strip { padding: 7px 1.2rem !important; }
+  .sch-title { font-size: 18px !important; }
+  .sch-table th, .sch-table td { padding: 6px 8px !important; font-size: 11px !important; }
+  .act-name { font-size: 12px !important; }
+  .sch-footer { margin-top: 0.8rem !important; padding-top: 0.7rem !important; }
+
+  /* Single page */
+  @page {
+    size: A4 landscape;
+    margin: 8mm;
+  }
 }
 
 /* MOBILE */
@@ -231,10 +299,6 @@ body{font-family:var(--font-body);background:#eef2f8;color:var(--text);min-heigh
       <label class="field-label" id="lbl-troop">اسم الفوج / المجموعة</label>
       <input class="field-input" id="troop" type="text" oninput="saveAndUpdate()"/>
     </div>
-    <div class="field-group">
-      <label class="field-label" id="lbl-leader">اسم القائد</label>
-      <input class="field-input" id="leader" type="text" oninput="saveAndUpdate()"/>
-    </div>
     <div class="field-row">
       <div class="field-group">
         <label class="field-label" id="lbl-date">التاريخ</label>
@@ -251,15 +315,8 @@ body{font-family:var(--font-body);background:#eef2f8;color:var(--text);min-heigh
       <label class="field-label" id="lbl-location">مكان الاجتماع</label>
       <input class="field-input" id="location" type="text" oninput="saveAndUpdate()"/>
     </div>
-    <div class="field-group">
-      <label class="field-label" id="lbl-theme">موضوع الاجتماع</label>
-      <input class="field-input" id="theme" type="text" oninput="saveAndUpdate()"/>
-    </div>
-    <div class="field-group">
-      <label class="field-label" id="lbl-preparedBy">أعدّه</label>
-      <input class="field-input" id="preparedBy" type="text" oninput="saveAndUpdate()"/>
-    </div>
   </div>
+
   <div class="sidebar-section">
     <div class="sidebar-section-title" id="lbl-summary">ملخّص</div>
     <div class="summary-stat"><span class="stat-label" id="lbl-totalAct">عدد الأنشطة</span><span class="stat-value" id="statCount">0</span></div>
@@ -267,6 +324,7 @@ body{font-family:var(--font-body);background:#eef2f8;color:var(--text);min-heigh
     <div class="summary-stat"><span class="stat-label" id="lbl-start">وقت البداية</span><span class="stat-value" id="statStart">—</span></div>
     <div class="summary-stat"><span class="stat-label" id="lbl-end">وقت النهاية</span><span class="stat-value" id="statEnd">—</span></div>
   </div>
+
   <div class="sidebar-actions">
     <button class="btn-generate" id="btnGenerate" onclick="generateSchedule()">✦ <span id="lbl-generate">إنشاء الجدول</span></button>
     <button class="btn-secondary" id="btnClear" onclick="clearAll()">↺ <span id="lbl-clear">مسح الكل</span></button>
@@ -315,17 +373,19 @@ const T = {
     typeKeys:['game','learning','ceremony','break','other'],
     f_actName:'اسم النشاط / اللعبة',f_resp:'المسؤول',
     f_time:'الوقت',f_materials:'المستلزمات',f_notes:'ملاحظات / أهداف',
-    f_timePh:'مثال: 17:00',f_actPh:'مثال: لعبة العقد',f_respPh:'مثال: القائد أحمد',
+    f_actPh:'مثال: لعبة العقد',f_respPh:'مثال: القائد أحمد',
     f_matPh:'مثال: حبال، خرائط',f_notesPh:'مثال: تنمية روح الفريق',
     min:'د',hrs:'س',
     schBadge:'🏕 جدول اجتماع كشفي',schSection:'البرنامج',
     th:['الوقت','النشاط','المسؤول','المستلزمات','الملاحظات / الأهداف'],
     infoTotal:'المدة الكلية',infoStart:'البداية',infoEnd:'النهاية',infoCount:'الأنشطة',
     sigLabel:'توقيع القائد',genLabel:'أعدّه',
-    btnBack:'← العودة للتعديل',btnPrint:'🖨 طباعة / PDF',
-    btnCopy:'📋 نسخ كنص',btnWhatsapp:'💬 واتساب',
+    btnBack:'→ العودة للتعديل',   /* RTL: arrow points right = "back" */
+    btnPdf:'💾 حفظ كـ PDF',
+    btnCopy:'📋 نسخ كنص',
     months:['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],
     confirmClear:'هل تريد مسح كل شيء؟',copiedMsg:'✅ تم النسخ!',noData:'لم تُضف أي أنشطة.',
+    pdfTip:'سيفتح حوار الطباعة — اختر «حفظ كـ PDF»، وتأكد من تفعيل «رسوم الخلفية» للألوان الكاملة.',
   },
   en: {
     logoTitle:'Scout Meeting Scheduler',logoSub:'Weekly Meeting Planner',
@@ -346,17 +406,19 @@ const T = {
     typeKeys:['game','learning','ceremony','break','other'],
     f_actName:'Activity / Game Name',f_resp:'Responsible Person',
     f_time:'Time Slot',f_materials:'Materials Needed',f_notes:'Notes / Objectives',
-    f_timePh:'e.g. 17:00',f_actPh:'e.g. Knot-tying challenge',f_respPh:'e.g. Leader Nour',
+    f_actPh:'e.g. Knot-tying challenge',f_respPh:'e.g. Leader Nour',
     f_matPh:'e.g. rope, maps',f_notesPh:'e.g. Build teamwork skills',
     min:'min',hrs:'hr',
     schBadge:'🏕 Scout Meeting Schedule',schSection:'Programme',
     th:['Time','Activity','Responsible','Materials','Notes / Objectives'],
     infoTotal:'Total duration',infoStart:'Start',infoEnd:'End',infoCount:'Activities',
     sigLabel:"Leader's signature",genLabel:'Prepared by',
-    btnBack:'← Back to editor',btnPrint:'🖨 Print / PDF',
-    btnCopy:'📋 Copy as text',btnWhatsapp:'💬 WhatsApp',
+    btnBack:'← Back to editor',
+    btnPdf:'💾 Save as PDF',
+    btnCopy:'📋 Copy as text',
     months:['January','February','March','April','May','June','July','August','September','October','November','December'],
     confirmClear:'Clear all activities and fields?',copiedMsg:'✅ Copied!',noData:'No activities were added.',
+    pdfTip:'The print dialog will open — choose "Save as PDF" and enable "Background graphics" for full colours.',
   }
 };
 
@@ -365,14 +427,14 @@ let activities = [];
 let idCounter = 0;
 
 // ── PERSIST ──
-const STORAGE_KEY = 'scout-planner-v2';
+const STORAGE_KEY = 'scout-planner-v3';
 function saveState() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({
       lang, activities, idCounter,
       meta: {
-        troop: v('troop'), leader: v('leader'), meetDate: v('meetDate'),
-        meetDay: v('meetDay'), location: v('location'), theme: v('theme'), preparedBy: v('preparedBy')
+        troop:v('troop'),leader:v('leader'),meetDate:v('meetDate'),
+        meetDay:v('meetDay'),location:v('location'),theme:v('theme'),preparedBy:v('preparedBy')
       }
     }));
   } catch(e){}
@@ -380,20 +442,19 @@ function saveState() {
 function loadState() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return false;
+    if(!raw) return false;
     const s = JSON.parse(raw);
-    lang = s.lang || 'ar';
-    activities = s.activities || [];
-    idCounter = s.idCounter || activities.length;
-    return s.meta || null;
+    lang = s.lang||'ar';
+    activities = s.activities||[];
+    idCounter = s.idCounter||activities.length;
+    return s.meta||null;
   } catch(e){ return false; }
 }
 function v(id){ const el=document.getElementById(id); return el?el.value:''; }
 function setV(id,val){ const el=document.getElementById(id); if(el&&val!==undefined) el.value=val; }
-
 function saveAndUpdate(){ saveState(); updateSummary(); }
 
-// ── MOBILE SIDEBAR ──
+// ── MOBILE ──
 function openMobileSidebar(){
   document.getElementById('sidebar').classList.add('mobile-open');
   document.getElementById('mobileOverlay').classList.add('open');
@@ -407,18 +468,17 @@ function closeMobileSidebar(){
 function setLang(l) {
   lang = l;
   const html = document.documentElement;
-  html.setAttribute('lang', l);
-  html.setAttribute('dir', l==='ar'?'rtl':'ltr');
-  document.getElementById('btnAr').classList.toggle('active', l==='ar');
-  document.getElementById('btnEn').classList.toggle('active', l==='en');
+  html.setAttribute('lang',l);
+  html.setAttribute('dir',l==='ar'?'rtl':'ltr');
+  document.getElementById('btnAr').classList.toggle('active',l==='ar');
+  document.getElementById('btnEn').classList.toggle('active',l==='en');
   const t = T[l];
   document.getElementById('logoTitle').textContent = t.logoTitle;
   document.getElementById('logoSub').textContent = t.logoSub;
   const mlt = document.getElementById('mobileLogoTitle');
   if(mlt) mlt.textContent = t.mobileTitle;
   ['lbl-troop','lbl-leader','lbl-date','lbl-day','lbl-location','lbl-theme','lbl-preparedBy',
-   'lbl-summary','lbl-totalAct','lbl-totalDur','lbl-start','lbl-end',
-   'lbl-pageTitle','lbl-pageSub'].forEach(id=>{
+   'lbl-summary','lbl-totalAct','lbl-totalDur','lbl-start','lbl-end','lbl-pageTitle','lbl-pageSub'].forEach(id=>{
     const el=document.getElementById(id); if(el) el.textContent=t[id];
   });
   document.getElementById('lbl-generate').textContent = t['lbl-generate'];
@@ -432,7 +492,7 @@ function setLang(l) {
 
 function buildDaySelect(savedVal) {
   const sel = document.getElementById('meetDay');
-  const cur = savedVal !== undefined ? savedVal : sel.value;
+  const cur = savedVal!==undefined ? savedVal : sel.value;
   sel.innerHTML = `<option value=""></option>` + T[lang].days.map(d=>`<option value="${d}">${d}</option>`).join('');
   if(cur) sel.value = cur;
 }
@@ -463,7 +523,7 @@ function updateField(id, field, val) {
 function setType(id, typeKey) {
   const a = activities.find(a=>a.id===id);
   if(!a) return;
-  a.type = a.type===typeKey ? '' : typeKey;
+  a.type = a.type===typeKey?'':typeKey;
   renderActivities(); saveAndUpdate();
 }
 
@@ -488,7 +548,7 @@ function fmt12(val24){
 function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
 function typeLabel(key){ const idx=T[lang].typeKeys.indexOf(key); return idx>=0?T[lang].types[idx]:key; }
 
-// ── TIME PICKER HELPERS ──
+// ── TIME PICKER ──
 function parse24(val){
   if(!val) return {h:null,m:0,ampm:'AM'};
   const [hh,mm]=val.split(':').map(Number);
@@ -526,37 +586,31 @@ function tpChange(id,slot){
   const val=to24(h,m,ampm);
   const field=slot==='start'?'startTime':'endTime';
   updateField(id,field,val);
-  // update badge without full rerender
-  const a=activities.find(a=>a.id===id);
-  if(a){
-    const dur=calcDuration(a.startTime,a.endTime);
-    const badge=document.querySelector(`#card-${id} .card-time-badge`);
-    const header=document.querySelector(`#card-${id} .card-header`);
-    if(badge){ badge.textContent=`${fmt12(a.startTime)||''}${a.endTime?' – '+fmt12(a.endTime):''} ${dur?'· '+fmtDuration(dur):''}`.trim(); }
-    else if(a.startTime&&header){
-      const b=document.createElement('div');
-      b.className='card-time-badge';
-      b.textContent=`${fmt12(a.startTime)}${a.endTime?' – '+fmt12(a.endTime):''} ${dur?'· '+fmtDuration(dur):''}`.trim();
-      header.insertBefore(b,header.querySelector('.card-remove'));
-    }
-  }
-  updateSummary();
+  refreshTimeBadge(id);
 }
 function tpAmpm(id,slot,val){
   const h=document.getElementById(`tph-${id}-${slot}`).value;
   const m=document.getElementById(`tpm-${id}-${slot}`).value;
   const field=slot==='start'?'startTime':'endTime';
-  const time24=to24(h,m,val);
-  updateField(id,field,time24);
-  // toggle button style
+  updateField(id,field,to24(h,m,val));
   document.querySelectorAll(`#tp-${id}-${slot} .tp-ampm-btn`).forEach(btn=>{
-    btn.classList.toggle('active', btn.textContent===val);
+    btn.classList.toggle('active',btn.textContent===val);
   });
+  refreshTimeBadge(id);
+}
+function refreshTimeBadge(id){
   const a=activities.find(a=>a.id===id);
-  if(a){
-    const dur=calcDuration(a.startTime,a.endTime);
-    const badge=document.querySelector(`#card-${id} .card-time-badge`);
-    if(badge) badge.textContent=`${fmt12(a.startTime)||''}${a.endTime?' – '+fmt12(a.endTime):''} ${dur?'· '+fmtDuration(dur):''}`.trim();
+  if(!a) return;
+  const dur=calcDuration(a.startTime,a.endTime);
+  const badge=document.querySelector(`#card-${id} .card-time-badge`);
+  const header=document.querySelector(`#card-${id} .card-header`);
+  const badgeText=`${fmt12(a.startTime)||''}${a.endTime?' – '+fmt12(a.endTime):''} ${dur?'· '+fmtDuration(dur):''}`.trim();
+  if(badge){ badge.textContent=badgeText; }
+  else if(a.startTime&&header){
+    const b=document.createElement('div');
+    b.className='card-time-badge';
+    b.textContent=badgeText;
+    header.insertBefore(b,header.querySelector('.card-remove'));
   }
   updateSummary();
 }
@@ -569,15 +623,15 @@ function renderActivities() {
     return;
   }
   list.innerHTML = activities.map((a,i)=>{
-    const dur = calcDuration(a.startTime,a.endTime);
+    const dur=calcDuration(a.startTime,a.endTime);
     return `
-    <div class="activity-card" id="card-${a.id}" draggable="true" 
-         ondragstart="dragStart(event,${a.id})" ondragover="dragOver(event,${a.id})" 
+    <div class="activity-card" id="card-${a.id}" draggable="true"
+         ondragstart="dragStart(event,${a.id})" ondragover="dragOver(event,${a.id})"
          ondrop="drop(event,${a.id})" ondragleave="dragLeave(event,${a.id})" ondragend="dragEnd(event)">
       <div class="card-header">
-        <div class="card-drag" title="drag to reorder">⠿</div>
+        <div class="card-drag">⠿</div>
         <div class="card-num">${i+1}</div>
-        <div class="card-title-text">${a.name?esc(a.name):`<span style="color:#aaa;font-weight:400">…</span>`}</div>
+        <div class="card-title-text">${a.name?esc(a.name):'<span style="color:#aaa;font-weight:400">…</span>'}</div>
         ${a.startTime?`<div class="card-time-badge">${fmt12(a.startTime)}${a.endTime?' – '+fmt12(a.endTime):''} ${dur?'· '+fmtDuration(dur):''}</div>`:''}
         <button class="card-remove" onclick="removeActivity(${a.id})">×</button>
       </div>
@@ -597,7 +651,7 @@ function renderActivities() {
           <label class="input-label">${t.f_time}</label>
           <div class="time-row">
             ${buildTimePicker(a.id,'start',a.startTime)}
-            <span class="time-sep">→</span>
+            <span class="time-sep"></span>
             ${buildTimePicker(a.id,'end',a.endTime)}
           </div>
         </div>
@@ -612,15 +666,13 @@ function renderActivities() {
       </div>
     </div>`;
   }).join('');
-
   setupTouchDrag();
 }
 
 function updateCardTitle(id,val){
   const el=document.querySelector(`#card-${id} .card-title-text`);
-  if(el) el.innerHTML=val?esc(val):`<span style="color:#aaa;font-weight:400">…</span>`;
+  if(el) el.innerHTML=val?esc(val):'<span style="color:#aaa;font-weight:400">…</span>';
 }
-function rerenderCard(id){ renderActivities(); updateSummary(); }
 
 function updateSummary(){
   document.getElementById('statCount').textContent=activities.length;
@@ -632,109 +684,51 @@ function updateSummary(){
   document.getElementById('statEnd').textContent=ends.length?fmt12(ends[ends.length-1]):'—';
 }
 
-// ── DRAG & DROP (desktop) ──
+// ── DRAG & DROP ──
 let dragId = null;
+function dragStart(e,id){ dragId=id; e.dataTransfer.effectAllowed='move'; setTimeout(()=>{const c=document.getElementById('card-'+id);if(c)c.classList.add('dragging');},0); }
+function dragOver(e,id){ e.preventDefault(); e.dataTransfer.dropEffect='move'; document.querySelectorAll('.activity-card').forEach(c=>c.classList.remove('drag-over')); const c=document.getElementById('card-'+id); if(c&&id!==dragId)c.classList.add('drag-over'); }
+function dragLeave(e,id){ const c=document.getElementById('card-'+id); if(c)c.classList.remove('drag-over'); }
+function drop(e,targetId){ e.preventDefault(); if(dragId===null||dragId===targetId)return; const fi=activities.findIndex(a=>a.id===dragId),ti=activities.findIndex(a=>a.id===targetId); if(fi<0||ti<0)return; const[item]=activities.splice(fi,1); activities.splice(ti,0,item); dragId=null; renderActivities(); saveAndUpdate(); }
+function dragEnd(e){ dragId=null; document.querySelectorAll('.activity-card').forEach(c=>c.classList.remove('dragging','drag-over')); }
 
-function dragStart(e, id) {
-  dragId = id;
-  e.dataTransfer.effectAllowed = 'move';
-  setTimeout(()=>{ const c=document.getElementById('card-'+id); if(c) c.classList.add('dragging'); },0);
-}
-function dragOver(e, id) {
-  e.preventDefault();
-  e.dataTransfer.dropEffect = 'move';
-  document.querySelectorAll('.activity-card').forEach(c=>c.classList.remove('drag-over'));
-  const c = document.getElementById('card-'+id);
-  if(c && id !== dragId) c.classList.add('drag-over');
-}
-function dragLeave(e, id) {
-  const c = document.getElementById('card-'+id);
-  if(c) c.classList.remove('drag-over');
-}
-function drop(e, targetId) {
-  e.preventDefault();
-  if(dragId === null || dragId === targetId) return;
-  const fromIdx = activities.findIndex(a=>a.id===dragId);
-  const toIdx = activities.findIndex(a=>a.id===targetId);
-  if(fromIdx<0||toIdx<0) return;
-  const [item] = activities.splice(fromIdx,1);
-  activities.splice(toIdx,0,item);
-  dragId = null;
-  renderActivities(); saveAndUpdate();
-}
-function dragEnd(e) {
-  dragId = null;
-  document.querySelectorAll('.activity-card').forEach(c=>{
-    c.classList.remove('dragging','drag-over');
-  });
-}
-
-// ── TOUCH DRAG (mobile) ──
+// ── TOUCH DRAG ──
 function setupTouchDrag() {
-  const cards = document.querySelectorAll('.activity-card');
-  cards.forEach(card => {
+  document.querySelectorAll('.activity-card').forEach(card => {
     const handle = card.querySelector('.card-drag');
     if(!handle) return;
-    let startY, startIdx, clone, placeholder;
-
+    let startY, clone, placeholder;
     handle.addEventListener('touchstart', e=>{
       e.preventDefault();
-      const id = parseInt(card.id.split('-')[1]);
-      startIdx = activities.findIndex(a=>a.id===id);
-      startY = e.touches[0].clientY;
-
-      clone = card.cloneNode(true);
-      clone.style.cssText = `position:fixed;left:${card.getBoundingClientRect().left}px;top:${card.getBoundingClientRect().top}px;width:${card.offsetWidth}px;opacity:.85;z-index:999;pointer-events:none;box-shadow:0 8px 32px rgba(0,0,0,.2);`;
+      const id=parseInt(card.id.split('-')[1]);
+      startY=e.touches[0].clientY;
+      clone=card.cloneNode(true);
+      clone.style.cssText=`position:fixed;left:${card.getBoundingClientRect().left}px;top:${card.getBoundingClientRect().top}px;width:${card.offsetWidth}px;opacity:.85;z-index:999;pointer-events:none;box-shadow:0 8px 32px rgba(0,0,0,.2);`;
       document.body.appendChild(clone);
-
-      placeholder = document.createElement('div');
-      placeholder.className = 'drop-placeholder';
-      card.parentNode.insertBefore(placeholder, card);
-      card.style.display = 'none';
-    }, {passive:false});
-
-    handle.addEventListener('touchmove', e=>{
+      placeholder=document.createElement('div');
+      placeholder.className='drop-placeholder';
+      card.parentNode.insertBefore(placeholder,card);
+      card.style.display='none';
+    },{passive:false});
+    handle.addEventListener('touchmove',e=>{
       e.preventDefault();
-      const dy = e.touches[0].clientY - startY;
-      clone.style.top = (parseFloat(clone.style.top)+dy) + 'px';
-      startY = e.touches[0].clientY;
-
-      const touchY = e.touches[0].clientY;
-      const allCards = [...document.querySelectorAll('.activity-card:not([style*="display: none"])')];
-      let targetCard = null;
-      allCards.forEach(c => {
-        const r = c.getBoundingClientRect();
-        if(touchY >= r.top && touchY <= r.bottom) targetCard = c;
-      });
-      if(targetCard) {
-        const r = targetCard.getBoundingClientRect();
-        if(touchY < r.top + r.height/2) targetCard.parentNode.insertBefore(placeholder, targetCard);
-        else targetCard.parentNode.insertBefore(placeholder, targetCard.nextSibling);
-      }
-    }, {passive:false});
-
-    handle.addEventListener('touchend', e=>{
-      const id = parseInt(card.id.split('-')[1]);
-      const fromIdx = activities.findIndex(a=>a.id===id);
-      const phIdx = [...placeholder.parentNode.children].indexOf(placeholder);
-      const realCards = [...document.querySelectorAll('.activity-card')];
-      let toIdx = phIdx;
-      // adjust for hidden card
-      let count = 0;
-      [...placeholder.parentNode.children].forEach((el,i)=>{
-        if(i < phIdx && el.classList && el.classList.contains('activity-card') && el.style.display!=='none') count++;
-      });
-      if(fromIdx < count) count--;
-      toIdx = count;
-
-      clone.remove();
-      placeholder.remove();
-      card.style.display = '';
-
-      if(toIdx !== fromIdx && toIdx >= 0 && toIdx < activities.length) {
-        const [item] = activities.splice(fromIdx,1);
-        activities.splice(toIdx,0,item);
-      }
+      const dy=e.touches[0].clientY-startY;
+      clone.style.top=(parseFloat(clone.style.top)+dy)+'px';
+      startY=e.touches[0].clientY;
+      const ty=e.touches[0].clientY;
+      const all=[...document.querySelectorAll('.activity-card:not([style*="display: none"])')];
+      let tc=null;
+      all.forEach(c=>{ const r=c.getBoundingClientRect(); if(ty>=r.top&&ty<=r.bottom)tc=c; });
+      if(tc){ const r=tc.getBoundingClientRect(); if(ty<r.top+r.height/2)tc.parentNode.insertBefore(placeholder,tc); else tc.parentNode.insertBefore(placeholder,tc.nextSibling); }
+    },{passive:false});
+    handle.addEventListener('touchend',e=>{
+      const id=parseInt(card.id.split('-')[1]);
+      const fi=activities.findIndex(a=>a.id===id);
+      let count=0;
+      [...placeholder.parentNode.children].forEach((el,i)=>{ const ph=[...placeholder.parentNode.children].indexOf(placeholder); if(i<ph&&el.classList&&el.classList.contains('activity-card')&&el.style.display!=='none')count++; });
+      if(fi<count)count--;
+      clone.remove(); placeholder.remove(); card.style.display='';
+      if(count!==fi&&count>=0&&count<activities.length){ const[item]=activities.splice(fi,1); activities.splice(count,0,item); }
       renderActivities(); saveAndUpdate();
     });
   });
@@ -743,15 +737,15 @@ function setupTouchDrag() {
 // ── GENERATE ──
 function fmtDate(d){
   if(!d) return '';
-  const [y,m,day]=d.split('-');
+  const[y,m,day]=d.split('-');
   return `${parseInt(day)} ${T[lang].months[parseInt(m)-1]} ${y}`;
 }
 
 function generateSchedule(){
   const t=T[lang];
   const meta={
-    troop:v('troop'), leader:v('leader'), date:v('meetDate'),
-    day:v('meetDay'), location:v('location'), theme:v('theme'), preparedBy:v('preparedBy'),
+    troop:v('troop'),leader:v('leader'),date:v('meetDate'),
+    day:v('meetDay'),location:v('location'),theme:v('theme'),preparedBy:v('preparedBy'),
   };
   const starts=activities.filter(a=>a.startTime).map(a=>a.startTime).sort();
   const ends=activities.filter(a=>a.endTime).map(a=>a.endTime).sort();
@@ -803,12 +797,13 @@ function generateSchedule(){
     </div>
   </div>`;
 
+  /* ── FIX 3: PDF-only button, no WhatsApp ── */
   document.getElementById('outputActions').innerHTML=`
     <button class="btn-action" onclick="backToEdit()">${t.btnBack}</button>
-    <button class="btn-action primary" onclick="window.print()">${t.btnPrint}</button>
+    <button class="btn-action primary" onclick="savePdf()">${t.btnPdf}</button>
     <button class="btn-action" onclick="copyAsText()">${t.btnCopy}</button>
-    <button class="btn-action" onclick="shareWhatsApp()">${t.btnWhatsapp}</button>
   `;
+
   document.getElementById('editorSection').style.display='none';
   const out=document.getElementById('scheduleOutput');
   out.classList.add('visible');
@@ -816,12 +811,24 @@ function generateSchedule(){
   closeMobileSidebar();
 }
 
+/* ── FIX 4: savePdf — shows tip then triggers print-to-PDF ── */
+function savePdf(){
+  const t=T[lang];
+  // Small non-blocking tip overlay
+  const tip=document.createElement('div');
+  tip.style.cssText='position:fixed;bottom:1.5rem;inset-inline-start:50%;transform:translateX(-50%);background:#0d2340;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;z-index:9999;max-width:90vw;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.3);font-family:var(--font-body)';
+  tip.textContent=t.pdfTip;
+  document.body.appendChild(tip);
+  setTimeout(()=>{ tip.remove(); },5000);
+  setTimeout(()=>{ window.print(); },300);
+}
+
 function backToEdit(){
   document.getElementById('scheduleOutput').classList.remove('visible');
   document.getElementById('editorSection').style.display='';
 }
 
-// ── EXPORT ──
+// ── COPY AS TEXT ──
 function copyAsText(){
   const t=T[lang];
   const meta={troop:v('troop'),leader:v('leader'),date:fmtDate(v('meetDate')),day:v('meetDay'),location:v('location'),theme:v('theme')};
@@ -834,7 +841,7 @@ function copyAsText(){
   txt+='\n';
   activities.forEach((a,i)=>{
     txt+=`${i+1}. ${a.name||'—'}\n`;
-    if(a.startTime||a.endTime) txt+=`   ⏰ ${[a.startTime,a.endTime].filter(Boolean).join(' → ')}\n`;
+    if(a.startTime||a.endTime) txt+=`   ⏰ ${[fmt12(a.startTime),fmt12(a.endTime)].filter(Boolean).join(' → ')}\n`;
     if(a.responsible) txt+=`   👤 ${a.responsible}\n`;
     if(a.materials) txt+=`   🎒 ${a.materials}\n`;
     if(a.notes) txt+=`   📝 ${a.notes}\n`;
@@ -844,60 +851,38 @@ function copyAsText(){
   navigator.clipboard.writeText(txt).then(()=>alert(t.copiedMsg)).catch(()=>prompt('',txt));
 }
 
-function shareWhatsApp(){
-  const t=T[lang];
-  const meta={troop:v('troop'),date:[v('meetDay'),fmtDate(v('meetDate'))].filter(Boolean).join(' · '),location:v('location'),theme:v('theme')};
-  let txt=`📋 *${t.schBadge}*\n`;
-  if(meta.troop) txt+=`🏕 *${meta.troop}*\n`;
-  if(meta.date) txt+=`📅 ${meta.date}\n`;
-  if(meta.location) txt+=`📍 ${meta.location}\n`;
-  if(meta.theme) txt+=`🎯 _${meta.theme}_\n`;
-  txt+='\n';
-  activities.forEach((a,i)=>{
-    txt+=`*${i+1}. ${a.name||'—'}*`;
-    if(a.startTime) txt+=` (${a.startTime}${a.endTime?'–'+a.endTime:''})`;
-    txt+='\n';
-    if(a.responsible) txt+=`   👤 ${a.responsible}\n`;
-    if(a.materials) txt+=`   🎒 ${a.materials}\n`;
-    if(a.notes) txt+=`   📝 ${a.notes}\n`;
-  });
-  window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
-}
-
 function clearAll(){
   if(!confirm(T[lang].confirmClear)) return;
   activities=[]; idCounter=0;
-  ['troop','leader','meetDate','meetDay','location','theme','preparedBy'].forEach(id=>{setV(id,'');});
+  ['troop','leader','meetDate','meetDay','location','theme','preparedBy'].forEach(id=>setV(id,''));
   renderActivities(); saveAndUpdate(); backToEdit();
 }
 
 // ── INIT ──
 (function init(){
-  const meta = loadState();
-  // apply saved lang
-  const html = document.documentElement;
-  html.setAttribute('lang', lang);
-  html.setAttribute('dir', lang==='ar'?'rtl':'ltr');
-  document.getElementById('btnAr').classList.toggle('active', lang==='ar');
-  document.getElementById('btnEn').classList.toggle('active', lang==='en');
-  const t = T[lang];
-  document.getElementById('logoTitle').textContent = t.logoTitle;
-  document.getElementById('logoSub').textContent = t.logoSub;
-  const mlt = document.getElementById('mobileLogoTitle');
-  if(mlt) mlt.textContent = t.mobileTitle;
+  const meta=loadState();
+  const html=document.documentElement;
+  html.setAttribute('lang',lang);
+  html.setAttribute('dir',lang==='ar'?'rtl':'ltr');
+  document.getElementById('btnAr').classList.toggle('active',lang==='ar');
+  document.getElementById('btnEn').classList.toggle('active',lang==='en');
+  const t=T[lang];
+  document.getElementById('logoTitle').textContent=t.logoTitle;
+  document.getElementById('logoSub').textContent=t.logoSub;
+  const mlt=document.getElementById('mobileLogoTitle');
+  if(mlt) mlt.textContent=t.mobileTitle;
   ['lbl-troop','lbl-leader','lbl-date','lbl-day','lbl-location','lbl-theme','lbl-preparedBy',
    'lbl-summary','lbl-totalAct','lbl-totalDur','lbl-start','lbl-end','lbl-pageTitle','lbl-pageSub'].forEach(id=>{
     const el=document.getElementById(id); if(el) el.textContent=t[id];
   });
-  document.getElementById('lbl-generate').textContent = t['lbl-generate'];
-  document.getElementById('lbl-clear').textContent = t['lbl-clear'];
-  document.getElementById('btnAdd').textContent = t.btnAdd;
-
-  buildDaySelect(meta?.meetDay || '');
+  document.getElementById('lbl-generate').textContent=t['lbl-generate'];
+  document.getElementById('lbl-clear').textContent=t['lbl-clear'];
+  document.getElementById('btnAdd').textContent=t.btnAdd;
+  buildDaySelect(meta?.meetDay||'');
   if(meta){
-    setV('troop', meta.troop); setV('leader', meta.leader);
-    setV('meetDate', meta.meetDate); setV('location', meta.location);
-    setV('theme', meta.theme); setV('preparedBy', meta.preparedBy);
+    setV('troop',meta.troop); setV('leader',meta.leader);
+    setV('meetDate',meta.meetDate); setV('location',meta.location);
+    setV('theme',meta.theme); setV('preparedBy',meta.preparedBy);
   }
   renderActivities();
   updateSummary();
