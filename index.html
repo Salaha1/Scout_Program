@@ -1,892 +1,2090 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>مخطط اجتماعات الكشافة</title>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<style>
-:root {
-  --navy:#0d2340; --navy2:#1a3a5c; --blue:#1e6fb5; --blue-light:#e8f2fc;
-  --green:#1a7a4a; --green-light:#e6f5ec;
-  --amber:#b56a00; --amber-light:#fff4e0;
-  --red:#c0392b; --red-light:#fdecea;
-  --teal:#0e7c7b; --teal-light:#e0f5f5;
-  --gray:#f4f5f7; --gray2:#e8eaed; --gray3:#c4c8d0;
-  --text:#1a1f2e; --text2:#4a5568; --text3:#8a94a6;
-  --white:#ffffff;
-  --radius:10px;
-  --shadow:0 2px 12px rgba(13,35,64,.08);
-  --shadow-lg:0 8px 32px rgba(13,35,64,.12);
-  --font-body:'Tajawal',sans-serif;
-  --font-en:'DM Sans',sans-serif;
-  --sidebar-w:300px;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:var(--font-body);background:#eef2f8;color:var(--text);min-height:100vh;}
+    <title>Salah | Computer Engineer & Cybersecurity Enthusiast</title>
 
-.app{display:grid;grid-template-columns:var(--sidebar-w) 1fr;min-height:100vh;}
+    <meta name="description"
+          content="Portfolio of Salah, a Computer Engineering student specializing in Systems, Networks, Cybersecurity, Cloud and Infrastructure.">
 
-/* SIDEBAR */
-.sidebar{background:var(--navy);color:#fff;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;}
-.sidebar-top{padding:1.4rem 1.2rem 1rem;border-bottom:1px solid rgba(255,255,255,.08);}
-.logo{display:flex;align-items:center;gap:10px;margin-bottom:1.2rem;}
-.logo-icon{width:38px;height:38px;border-radius:10px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
-.logo-title{font-size:15px;font-weight:700;color:#fff;line-height:1.3;}
-.logo-sub{font-size:11px;color:rgba(255,255,255,.4);margin-top:1px;}
-.lang-toggle{display:flex;gap:6px;margin-bottom:1rem;}
-.lang-btn{flex:1;padding:5px;border-radius:7px;border:1px solid rgba(255,255,255,.15);background:none;color:rgba(255,255,255,.5);font-size:12px;cursor:pointer;font-family:var(--font-body);transition:all .2s;font-weight:500;}
-.lang-btn.active{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.3);}
-.field-group{margin-bottom:.8rem;}
-.field-label{font-size:11px;font-weight:700;letter-spacing:.04em;color:rgba(255,255,255,.4);text-transform:uppercase;margin-bottom:3px;display:block;}
-[lang="ar"] .field-label{letter-spacing:0;font-size:11.5px;}
-.field-input{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:8px 11px;font-size:13px;color:#fff;font-family:var(--font-body);transition:border .2s;}
-.field-input::placeholder{color:rgba(255,255,255,.28);}
-.field-input:focus{outline:none;border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.11);}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
-.sidebar-section{padding:1rem 1.2rem;border-bottom:1px solid rgba(255,255,255,.08);}
-.sidebar-section-title{font-size:11px;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.3);text-transform:uppercase;margin-bottom:.7rem;}
-[lang="ar"] .sidebar-section-title{letter-spacing:0;font-size:11.5px;}
-.summary-stat{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05);}
-.summary-stat:last-child{border-bottom:none;}
-.stat-label{font-size:12px;color:rgba(255,255,255,.5);}
-.stat-value{font-size:12.5px;font-weight:700;color:#fff;}
-.sidebar-actions{padding:1.2rem;margin-top:auto;}
-.btn-generate{width:100%;background:var(--blue);border:none;border-radius:10px;padding:12px;font-size:13.5px;font-weight:700;color:#fff;cursor:pointer;font-family:var(--font-body);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
-.btn-generate:hover{background:#1a5fa0;}
-.btn-secondary{width:100%;background:none;border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:8px;font-size:12.5px;color:rgba(255,255,255,.5);cursor:pointer;font-family:var(--font-body);margin-top:7px;transition:all .2s;}
-.btn-secondary:hover{border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.8);}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-/* MOBILE HEADER */
-.mobile-header{display:none;background:var(--navy);color:#fff;padding:12px 16px;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
-.mobile-logo{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;}
-.mobile-logo-icon{width:30px;height:30px;border-radius:8px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:15px;}
-.btn-menu{background:rgba(255,255,255,.1);border:none;border-radius:7px;padding:7px 10px;color:#fff;cursor:pointer;font-size:18px;line-height:1;}
-.mobile-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;}
-.mobile-overlay.open{display:block;}
-.sidebar.mobile-open{display:flex!important;position:fixed;inset:0;z-index:201;width:min(320px,90vw);}
-[dir="rtl"] .sidebar.mobile-open{right:0;left:auto;}
-[dir="ltr"] .sidebar.mobile-open{left:0;right:auto;}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+          rel="stylesheet">
 
-/* MAIN */
-.main{padding:1.6rem;overflow-y:auto;min-width:0;}
-.page-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.3rem;gap:10px;flex-wrap:wrap;}
-.page-title{font-size:22px;font-weight:700;color:var(--navy);}
-.page-subtitle{font-size:12.5px;color:var(--text3);margin-top:2px;line-height:1.5;}
-.header-btns{display:flex;gap:8px;align-items:flex-start;flex-shrink:0;}
-.btn-add{background:var(--navy);border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:600;color:#fff;cursor:pointer;font-family:var(--font-body);display:flex;align-items:center;gap:5px;transition:all .2s;white-space:nowrap;}
-.btn-add:hover{background:var(--navy2);}
+    <style>
 
-/* ACTIVITY CARDS */
-.activities-list{display:flex;flex-direction:column;gap:10px;}
-.activity-card{background:var(--white);border-radius:var(--radius);border:1px solid var(--gray2);box-shadow:var(--shadow);overflow:hidden;transition:box-shadow .2s,opacity .2s;}
-.activity-card.dragging{opacity:.5;box-shadow:var(--shadow-lg);}
-.activity-card.drag-over{border-color:var(--blue);box-shadow:0 0 0 2px rgba(30,111,181,.2);}
-.card-header{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--gray);border-bottom:1px solid var(--gray2);}
-.card-num{width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.card-title-text{flex:1;font-size:13px;font-weight:600;color:var(--text);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.card-time-badge{font-size:11px;font-weight:600;color:var(--blue);background:var(--blue-light);border-radius:20px;padding:3px 8px;white-space:nowrap;flex-shrink:0;}
-.card-drag{cursor:grab;color:var(--text3);padding:3px 5px;font-size:18px;user-select:none;touch-action:none;flex-shrink:0;}
-.card-drag:active{cursor:grabbing;}
-.card-remove{background:none;border:none;color:var(--text3);cursor:pointer;font-size:18px;line-height:1;transition:color .2s;padding:2px 5px;border-radius:5px;flex-shrink:0;}
-.card-remove:hover{color:var(--red);background:var(--red-light);}
-.type-row{padding:7px 12px;display:flex;gap:5px;flex-wrap:wrap;border-bottom:1px solid var(--gray);}
-.type-chip{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;border:1px solid var(--gray2);background:var(--white);color:var(--text2);cursor:pointer;transition:all .15s;font-family:var(--font-body);}
-.type-chip.active-game{background:var(--green-light);border-color:var(--green);color:var(--green);}
-.type-chip.active-learning{background:var(--blue-light);border-color:var(--blue);color:var(--blue);}
-.type-chip.active-ceremony{background:var(--amber-light);border-color:var(--amber);color:var(--amber);}
-.type-chip.active-break{background:var(--gray);border-color:var(--gray3);color:var(--text2);}
-.type-chip.active-other{background:var(--teal-light);border-color:var(--teal);color:var(--teal);}
-.card-body{padding:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.input-group{display:flex;flex-direction:column;gap:3px;}
-.input-label{font-size:10.5px;font-weight:700;color:var(--text3);letter-spacing:.04em;text-transform:uppercase;}
-[lang="ar"] .input-label{letter-spacing:0;font-size:11px;}
-.input-field{border:1px solid var(--gray2);border-radius:7px;padding:7px 10px;font-size:12.5px;color:var(--text);font-family:var(--font-body);transition:border .2s;background:var(--white);width:100%;}
-.input-field:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,111,181,.1);}
-.time-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
-/* ── FIX 1: directional arrow – flips with dir ── */
-.time-sep{color:var(--text3);font-size:13px;font-weight:700;flex-shrink:0;}
-.time-sep::before{content:'→';}
-[dir="rtl"] .time-sep::before{content:'←';}
-.time-picker{display:flex;align-items:center;gap:4px;background:var(--white);border:1px solid var(--gray2);border-radius:7px;padding:4px 7px;transition:border .2s;}
-.time-picker:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,111,181,.1);}
-.tp-select{border:none;background:none;font-size:13px;font-weight:600;color:var(--text);font-family:var(--font-body);padding:2px 1px;cursor:pointer;outline:none;-webkit-appearance:none;appearance:none;text-align:center;width:32px;}
-.tp-select:focus{outline:none;}
-.tp-colon{font-size:13px;font-weight:700;color:var(--text2);}
-.tp-ampm{display:flex;border-radius:5px;overflow:hidden;border:1px solid var(--gray2);margin-inline-start:3px;}
-.tp-ampm-btn{border:none;background:var(--gray);color:var(--text3);font-size:11px;font-weight:700;padding:3px 7px;cursor:pointer;font-family:var(--font-body);transition:all .15s;line-height:1.4;}
-.tp-ampm-btn.active{background:var(--navy);color:#fff;}
-.full-col{grid-column:1/-1;}
+        /* =========================================================
+           GLOBAL
+        ========================================================= */
 
-.empty-state{text-align:center;padding:3rem 1.5rem;color:var(--text3);background:var(--white);border-radius:var(--radius);border:2px dashed var(--gray2);}
-.empty-icon{font-size:36px;margin-bottom:8px;}
-.empty-text{font-size:14px;color:var(--text2);margin-bottom:3px;font-weight:600;}
-.empty-sub{font-size:12.5px;}
+        :root {
+            --bg: #070b14;
+            --bg-secondary: #0c1220;
+            --card: rgba(16, 24, 40, 0.75);
+            --card-solid: #101828;
 
-/* DRAG PLACEHOLDER */
-.drop-placeholder{height:60px;border:2px dashed var(--blue);border-radius:var(--radius);background:var(--blue-light);opacity:.5;pointer-events:none;}
+            --text: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
 
-/* OUTPUT */
-#scheduleOutput{display:none;}
-#scheduleOutput.visible{display:block;}
-.output-actions{display:flex;gap:8px;margin-bottom:1.3rem;flex-wrap:wrap;}
-.btn-action{background:var(--white);border:1px solid var(--gray2);border-radius:8px;padding:8px 14px;font-size:12.5px;font-weight:500;color:var(--text);cursor:pointer;font-family:var(--font-body);display:flex;align-items:center;gap:6px;transition:all .2s;box-shadow:var(--shadow);}
-.btn-action:hover{border-color:var(--blue);color:var(--blue);}
-.btn-action.primary{background:var(--navy);color:#fff;border-color:var(--navy);}
-.btn-action.primary:hover{background:var(--navy2);color:#fff;}
+            --accent: #38bdf8;
+            --accent-secondary: #818cf8;
+            --accent-dark: #0284c7;
 
-/* SCHEDULE CARD */
-.schedule-card{background:var(--white);border-radius:14px;box-shadow:var(--shadow-lg);overflow:hidden;border:1px solid var(--gray2);}
-.sch-header{background:var(--navy);padding:1.8rem 2rem 1.5rem;color:#fff;position:relative;overflow:hidden;}
-.sch-header::before{content:'';position:absolute;top:-50px;left:-50px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.035);}
-.sch-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.12);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;color:rgba(255,255,255,.7);margin-bottom:10px;}
-.sch-title{font-size:24px;font-weight:700;color:#fff;margin-bottom:4px;line-height:1.3;}
-.sch-subtitle{font-size:13px;color:rgba(255,255,255,.6);}
-.sch-meta-row{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;}
-.sch-meta-item{display:flex;align-items:center;gap:6px;font-size:12.5px;color:rgba(255,255,255,.65);}
-.sch-meta-item strong{color:#fff;}
-.sch-info-strip{background:var(--blue-light);padding:10px 2rem;display:flex;gap:20px;flex-wrap:wrap;border-bottom:1px solid var(--gray2);}
-.sch-info-item{font-size:12px;color:var(--navy2);}
-.sch-info-item b{color:var(--navy);font-weight:700;}
-.sch-body{padding:1.5rem 2rem;}
-.sch-section-title{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:.9rem;}
-[lang="ar"] .sch-section-title{letter-spacing:0;font-size:11.5px;}
-.sch-table{width:100%;border-collapse:collapse;}
-.sch-table th{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--text3);padding:7px 11px;border-bottom:2px solid var(--gray2);text-align:start;}
-[lang="ar"] .sch-table th{letter-spacing:0;font-size:11px;}
-.sch-table td{padding:10px 11px;border-bottom:1px solid var(--gray);vertical-align:top;font-size:13px;}
-.sch-table tr:last-child td{border-bottom:none;}
-.sch-table tr:hover td{background:#fafbfd;}
-.act-name{font-weight:700;color:var(--navy);font-size:13.5px;}
-.act-pill{display:inline-block;font-size:10px;font-weight:700;border-radius:4px;padding:2px 6px;margin-inline-start:6px;vertical-align:middle;}
-.pill-game{background:var(--green-light);color:var(--green);}
-.pill-learning{background:var(--blue-light);color:var(--blue);}
-.pill-ceremony{background:var(--amber-light);color:var(--amber);}
-.pill-break{background:var(--gray);color:var(--text2);}
-.pill-other{background:var(--teal-light);color:var(--teal);}
-.time-col{font-size:12.5px;font-weight:600;color:var(--text2);white-space:nowrap;}
-.dur-tag{font-size:11px;color:var(--text3);margin-top:2px;}
-.mat-tag{display:inline-block;background:var(--gray);border-radius:4px;padding:2px 6px;margin:2px;font-size:11px;}
-.notes-td{font-size:12px;color:var(--text2);font-style:italic;}
-.sch-footer{margin-top:1.4rem;padding-top:1.1rem;border-top:1px solid var(--gray2);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;}
-.sig-line{font-size:12px;color:var(--text3);margin-bottom:5px;}
-.sig-blank{width:160px;border-bottom:1.5px solid var(--gray3);height:28px;}
-.footer-note{font-size:11.5px;color:var(--text3);text-align:end;}
+            --border: rgba(148, 163, 184, 0.13);
 
-/* SCROLLBAR */
-::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:rgba(0,0,0,.14);border-radius:3px;}
+            --success: #22c55e;
 
-/* ── FIX 2: Clean single-page PDF print ── */
-@media print {
-  /* Hide everything except the schedule card */
-  body > *,
-  .app,
-  .sidebar,
-  .mobile-header,
-  .mobile-overlay,
-  #editorSection,
-  .output-actions {
-    display: none !important;
-  }
+            --max-width: 1150px;
 
-  /* Reset body for print */
-  body {
-    background: #fff !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    font-family: 'Tajawal', 'DM Sans', Arial, sans-serif !important;
-  }
+            --radius: 18px;
+        }
 
-  /* Pull the output section out of the grid and make it the only thing */
-  #scheduleOutput {
-    display: block !important;
-    position: fixed !important;
-    inset: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    background: #fff !important;
-    z-index: 9999 !important;
-  }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  #scheduleOutput .output-actions {
-    display: none !important;
-  }
+        html {
+            scroll-behavior: smooth;
+        }
 
-  /* The schedule card itself */
-  .schedule-card {
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    border: none !important;
-    width: 100% !important;
-    page-break-inside: avoid;
-  }
+        body {
+            font-family: "Inter", sans-serif;
+            background:
+                radial-gradient(
+                    circle at 20% 10%,
+                    rgba(56, 189, 248, 0.08),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 80% 30%,
+                    rgba(129, 140, 248, 0.08),
+                    transparent 30%
+                ),
+                var(--bg);
 
-  /* Force colour printing */
-  .sch-header {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-    color-adjust: exact !important;
-  }
-  .sch-info-strip,
-  .act-pill,
-  .mat-tag,
-  .pill-game, .pill-learning, .pill-ceremony, .pill-break, .pill-other {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-  /* Compact table for single page */
-  .sch-body { padding: 0.8rem 1.2rem !important; }
-  .sch-header { padding: 1rem 1.2rem 0.8rem !important; }
-  .sch-info-strip { padding: 7px 1.2rem !important; }
-  .sch-title { font-size: 18px !important; }
-  .sch-table th, .sch-table td { padding: 6px 8px !important; font-size: 11px !important; }
-  .act-name { font-size: 12px !important; }
-  .sch-footer { margin-top: 0.8rem !important; padding-top: 0.7rem !important; }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
-  /* Single page */
-  @page {
-    size: A4 landscape;
-    margin: 8mm;
-  }
-}
+        img {
+            max-width: 100%;
+        }
 
-/* MOBILE */
-@media(max-width:760px){
-  .app{grid-template-columns:1fr;}
-  .sidebar{display:none;height:100vh;}
-  .mobile-header{display:flex;}
-  .main{padding:1rem;}
-  .card-body{grid-template-columns:1fr;}
-  .output-actions{gap:6px;}
-  .btn-action{padding:7px 11px;font-size:12px;}
-  .sch-header{padding:1.2rem 1.2rem 1rem;}
-  .sch-title{font-size:18px;}
-  .sch-body{padding:1rem 1.2rem;}
-  .sch-info-strip{padding:8px 1.2rem;}
-  .sch-table th,.sch-table td{padding:8px 7px;font-size:12px;}
-  .page-title{font-size:18px;}
-  .btn-add{padding:8px 12px;font-size:12px;}
-}
-</style>
+        .container {
+            width: min(90%, var(--max-width));
+            margin: auto;
+        }
+
+        section {
+            padding: 100px 0;
+            scroll-margin-top: 80px;
+        }
+
+        /* =========================================================
+           BACKGROUND
+        ========================================================= */
+
+        .grid-background {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 50px 50px;
+
+            mask-image: linear-gradient(
+                to bottom,
+                black,
+                transparent 90%
+            );
+        }
+
+        .glow {
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .glow-one {
+            background: var(--accent);
+            top: 10%;
+            left: -150px;
+        }
+
+        .glow-two {
+            background: var(--accent-secondary);
+            right: -150px;
+            top: 50%;
+        }
+
+        /* =========================================================
+           NAVBAR
+        ========================================================= */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+
+            height: 72px;
+
+            background: rgba(7, 11, 20, 0.75);
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid var(--border);
+
+            z-index: 1000;
+        }
+
+        .nav-container {
+            height: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+
+            transition: 0.25s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-button {
+            padding: 9px 17px;
+
+            border: 1px solid rgba(56,189,248,0.35);
+            border-radius: 8px;
+
+            color: var(--accent) !important;
+
+            background: rgba(56,189,248,0.05);
+        }
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        #home {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+
+            padding-top: 120px;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            gap: 60px;
+
+            align-items: center;
+        }
+
+        .terminal-label {
+            font-family: "JetBrains Mono", monospace;
+
+            color: var(--accent);
+            font-size: 14px;
+
+            margin-bottom: 18px;
+        }
+
+        .terminal-label::before {
+            content: "> ";
+            color: var(--success);
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 76px);
+            line-height: 1.05;
+
+            letter-spacing: -3px;
+
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(
+                120deg,
+                var(--accent),
+                var(--accent-secondary)
+            );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+        }
+
+        .hero-description {
+            max-width: 650px;
+
+            color: var(--text-secondary);
+
+            font-size: 18px;
+            line-height: 1.8;
+
+            margin-bottom: 35px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 13px 22px;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition: 0.25s;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #02131c;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 35px rgba(56,189,248,0.2);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--border);
+            color: var(--text);
+            background: rgba(255,255,255,0.03);
+        }
+
+        .btn-secondary:hover {
+            border-color: rgba(56,189,248,0.4);
+            color: var(--accent);
+        }
+
+        /* =========================================================
+           TERMINAL
+        ========================================================= */
+
+        .terminal {
+            background: #080d17;
+
+            border: 1px solid var(--border);
+
+            border-radius: 16px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.35),
+                0 0 50px rgba(56,189,248,0.05);
+        }
+
+        .terminal-header {
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 15px;
+
+            border-bottom: 1px solid var(--border);
+
+            background: rgba(255,255,255,0.025);
+        }
+
+        .terminal-dot {
+            width: 9px;
+            height: 9px;
+
+            border-radius: 50%;
+
+            margin-right: 6px;
+        }
+
+        .terminal-title {
+            margin-left: 10px;
+
+            font-family: "JetBrains Mono", monospace;
+
+            font-size: 11px;
+
+            color: var(--text-muted);
+        }
+
+        .terminal-body {
+            padding: 25px;
+
+            font-family: "JetBrains Mono", monospace;
+            font-size: 13px;
+
+            line-height: 2;
+        }
+
+        .terminal-line {
+            color: var(--text-secondary);
+        }
+
+        .terminal-command {
+            color: var(--accent);
+        }
+
+        .terminal-value {
+            color: #c4b5fd;
+        }
+
+        /* =========================================================
+           SECTION HEADERS
+        ========================================================= */
+
+        .section-header {
+            margin-bottom: 50px;
+        }
+
+        .section-number {
+            font-family: "JetBrains Mono", monospace;
+
+            color: var(--accent);
+
+            font-size: 13px;
+
+            margin-bottom: 10px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(30px, 5vw, 46px);
+
+            letter-spacing: -1.5px;
+
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            max-width: 650px;
+
+            color: var(--text-secondary);
+        }
+
+        /* =========================================================
+           ABOUT
+        ========================================================= */
+
+        .about-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 60px;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+
+            margin-bottom: 20px;
+
+            font-size: 16px;
+        }
+
+        .about-highlight {
+            border-left: 2px solid var(--accent);
+
+            padding-left: 20px;
+
+            margin-top: 30px;
+
+            color: var(--text);
+        }
+
+        .stats {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 15px;
+        }
+
+        .stat-card {
+            padding: 25px;
+
+            border: 1px solid var(--border);
+
+            border-radius: var(--radius);
+
+            background: var(--card);
+
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-card h3 {
+            font-size: 28px;
+
+            color: var(--accent);
+
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            color: var(--text-secondary);
+
+            font-size: 13px;
+        }
+
+        /* =========================================================
+           SKILLS
+        ========================================================= */
+
+        .skills-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 18px;
+        }
+
+        .skill-card {
+            padding: 28px;
+
+            border: 1px solid var(--border);
+
+            border-radius: var(--radius);
+
+            background: var(--card);
+
+            transition: 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+
+            border-color: rgba(56,189,248,0.3);
+
+            background: rgba(20,30,50,0.8);
+        }
+
+        .skill-icon {
+            font-size: 25px;
+
+            margin-bottom: 15px;
+        }
+
+        .skill-card h3 {
+            font-size: 17px;
+
+            margin-bottom: 10px;
+        }
+
+        .skill-card p {
+            color: var(--text-secondary);
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 7px;
+
+            margin-top: 17px;
+        }
+
+        .tag {
+            font-family: "JetBrains Mono", monospace;
+
+            font-size: 10px;
+
+            padding: 5px 8px;
+
+            border-radius: 5px;
+
+            background: rgba(56,189,248,0.07);
+
+            border: 1px solid rgba(56,189,248,0.12);
+
+            color: #7dd3fc;
+        }
+
+        /* =========================================================
+           PROJECTS
+        ========================================================= */
+
+        .projects-grid {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 22px;
+        }
+
+        .project-card {
+            position: relative;
+
+            padding: 32px;
+
+            min-height: 320px;
+
+            display: flex;
+            flex-direction: column;
+
+            border: 1px solid var(--border);
+
+            border-radius: var(--radius);
+
+            background: var(--card);
+
+            overflow: hidden;
+
+            transition: 0.3s;
+        }
+
+        .project-card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            border-radius: 50%;
+
+            background: var(--accent);
+
+            filter: blur(100px);
+
+            opacity: 0;
+
+            right: -100px;
+            top: -100px;
+
+            transition: 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+
+            border-color: rgba(56,189,248,0.3);
+        }
+
+        .project-card:hover::after {
+            opacity: 0.08;
+        }
+
+        .project-number {
+            font-family: "JetBrains Mono", monospace;
+
+            color: var(--accent);
+
+            font-size: 12px;
+
+            margin-bottom: 20px;
+        }
+
+        .project-card h3 {
+            font-size: 22px;
+
+            margin-bottom: 12px;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+
+            font-size: 14px;
+
+            line-height: 1.7;
+
+            flex: 1;
+        }
+
+        .project-tech {
+            margin-top: 25px;
+
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 7px;
+        }
+
+        /* =========================================================
+           EXPERIENCE
+        ========================================================= */
+
+        .timeline {
+            position: relative;
+
+            max-width: 850px;
+        }
+
+        .timeline::before {
+            content: "";
+
+            position: absolute;
+
+            left: 8px;
+            top: 10px;
+            bottom: 10px;
+
+            width: 1px;
+
+            background: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+
+            padding-left: 40px;
+
+            margin-bottom: 45px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+
+            left: 3px;
+            top: 7px;
+
+            width: 11px;
+            height: 11px;
+
+            border-radius: 50%;
+
+            background: var(--accent);
+
+            box-shadow: 0 0 15px rgba(56,189,248,0.4);
+        }
+
+        .timeline-date {
+            font-family: "JetBrains Mono", monospace;
+
+            color: var(--accent);
+
+            font-size: 11px;
+
+            margin-bottom: 7px;
+        }
+
+        .timeline-item h3 {
+            font-size: 20px;
+
+            margin-bottom: 3px;
+        }
+
+        .timeline-company {
+            color: var(--text-secondary);
+
+            font-size: 14px;
+
+            margin-bottom: 12px;
+        }
+
+        .timeline-item p {
+            color: var(--text-secondary);
+
+            font-size: 14px;
+
+            max-width: 700px;
+        }
+
+        /* =========================================================
+           EDUCATION
+        ========================================================= */
+
+        .education-card {
+            max-width: 850px;
+
+            padding: 35px;
+
+            border: 1px solid var(--border);
+
+            border-radius: var(--radius);
+
+            background: var(--card);
+
+            display: flex;
+
+            gap: 25px;
+
+            align-items: flex-start;
+        }
+
+        .education-icon {
+            font-size: 35px;
+        }
+
+        .education-card h3 {
+            font-size: 21px;
+
+            margin-bottom: 7px;
+        }
+
+        .education-card .university {
+            color: var(--accent);
+
+            font-size: 14px;
+
+            margin-bottom: 10px;
+        }
+
+        .education-card p {
+            color: var(--text-secondary);
+
+            font-size: 14px;
+        }
+
+        /* =========================================================
+           SECURITY / PHILOSOPHY
+        ========================================================= */
+
+        .security-box {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 40px;
+
+            padding: 45px;
+
+            border: 1px solid rgba(56,189,248,0.15);
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(56,189,248,0.05),
+                    rgba(129,140,248,0.03)
+                );
+        }
+
+        .security-box h3 {
+            font-size: 26px;
+
+            margin-bottom: 15px;
+        }
+
+        .security-box p {
+            color: var(--text-secondary);
+
+            font-size: 15px;
+        }
+
+        .security-list {
+            display: grid;
+
+            gap: 12px;
+        }
+
+        .security-list div {
+            padding: 12px 15px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 9px;
+
+            background: rgba(255,255,255,0.02);
+
+            color: var(--text-secondary);
+
+            font-size: 13px;
+
+            font-family: "JetBrains Mono", monospace;
+        }
+
+        .security-list span {
+            color: var(--success);
+
+            margin-right: 8px;
+        }
+
+        /* =========================================================
+           CONTACT
+        ========================================================= */
+
+        #contact {
+            padding-bottom: 50px;
+        }
+
+        .contact-box {
+            text-align: center;
+
+            max-width: 750px;
+
+            margin: auto;
+        }
+
+        .contact-box h2 {
+            font-size: clamp(35px, 6vw, 55px);
+
+            letter-spacing: -2px;
+
+            margin-bottom: 20px;
+        }
+
+        .contact-box p {
+            color: var(--text-secondary);
+
+            margin-bottom: 30px;
+        }
+
+        .contact-links {
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 12px;
+        }
+
+        .contact-link {
+            padding: 11px 17px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+
+            color: var(--text-secondary);
+
+            font-size: 13px;
+
+            transition: 0.25s;
+        }
+
+        .contact-link:hover {
+            color: var(--accent);
+
+            border-color: rgba(56,189,248,0.3);
+        }
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            border-top: 1px solid var(--border);
+
+            padding: 25px 0;
+
+            color: var(--text-muted);
+
+            font-family: "JetBrains Mono", monospace;
+
+            font-size: 11px;
+
+            text-align: center;
+        }
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 850px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero,
+            .about-grid,
+            .security-box {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                gap: 40px;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            section {
+                padding: 75px 0;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .security-box {
+                padding: 28px;
+            }
+
+            .education-card {
+                flex-direction: column;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+    </style>
 </head>
+
+
 <body>
-<div class="mobile-header">
-  <div class="mobile-logo">
-    <div class="mobile-logo-icon">🏕</div>
-    <span id="mobileLogoTitle">مخطط اجتماعات الكشافة</span>
-  </div>
-  <button class="btn-menu" id="btnMenu" onclick="openMobileSidebar()">☰</button>
-</div>
-<div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileSidebar()"></div>
 
-<div class="app">
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-top">
-    <div class="logo">
-      <div class="logo-icon">🏕</div>
-      <div>
-        <div class="logo-title" id="logoTitle">مخطط اجتماعات الكشافة</div>
-        <div class="logo-sub" id="logoSub">منظّم الاجتماع الأسبوعي</div>
-      </div>
-    </div>
-    <div class="lang-toggle">
-      <button class="lang-btn active" id="btnAr" onclick="setLang('ar')">العربية</button>
-      <button class="lang-btn" id="btnEn" onclick="setLang('en')">English</button>
-    </div>
-    <div class="field-group">
-      <label class="field-label" id="lbl-troop">اسم الفوج / المجموعة</label>
-      <input class="field-input" id="troop" type="text" oninput="saveAndUpdate()"/>
-    </div>
-    <div class="field-row">
-      <div class="field-group">
-        <label class="field-label" id="lbl-date">التاريخ</label>
-        <input class="field-input" id="meetDate" type="date" oninput="saveAndUpdate()"/>
-      </div>
-      <div class="field-group">
-        <label class="field-label" id="lbl-day">اليوم</label>
-        <select class="field-input" id="meetDay" oninput="saveAndUpdate()">
-          <option value=""></option>
-        </select>
-      </div>
-    </div>
-    <div class="field-group">
-      <label class="field-label" id="lbl-location">مكان الاجتماع</label>
-      <input class="field-input" id="location" type="text" oninput="saveAndUpdate()"/>
-    </div>
-  </div>
+    <!-- Background -->
+    <div class="grid-background"></div>
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
 
-  <div class="sidebar-section">
-    <div class="sidebar-section-title" id="lbl-summary">ملخّص</div>
-    <div class="summary-stat"><span class="stat-label" id="lbl-totalAct">عدد الأنشطة</span><span class="stat-value" id="statCount">0</span></div>
-    <div class="summary-stat"><span class="stat-label" id="lbl-totalDur">المدة الكلية</span><span class="stat-value" id="statDuration">—</span></div>
-    <div class="summary-stat"><span class="stat-label" id="lbl-start">وقت البداية</span><span class="stat-value" id="statStart">—</span></div>
-    <div class="summary-stat"><span class="stat-label" id="lbl-end">وقت النهاية</span><span class="stat-value" id="statEnd">—</span></div>
-  </div>
 
-  <div class="sidebar-actions">
-    <button class="btn-generate" id="btnGenerate" onclick="generateSchedule()">✦ <span id="lbl-generate">إنشاء الجدول</span></button>
-    <button class="btn-secondary" id="btnClear" onclick="clearAll()">↺ <span id="lbl-clear">مسح الكل</span></button>
-  </div>
-</aside>
+    <!-- =========================================================
+         NAVIGATION
+    ========================================================== -->
 
-<main class="main">
-  <div id="editorSection">
-    <div class="page-header">
-      <div>
-        <div class="page-title" id="lbl-pageTitle">خطّط اجتماعك</div>
-        <div class="page-subtitle" id="lbl-pageSub">أضف الأنشطة، رتّبها بالسحب، ثم اضغط «إنشاء الجدول»</div>
-      </div>
-      <div class="header-btns">
-        <button class="btn-add" onclick="addActivity()" id="btnAdd">+ إضافة نشاط</button>
-      </div>
-    </div>
-    <div class="activities-list" id="activitiesList"></div>
-  </div>
+    <nav>
 
-  <div id="scheduleOutput">
-    <div class="output-actions" id="outputActions"></div>
-    <div id="scheduleCard"></div>
-  </div>
-</main>
-</div>
+        <div class="container nav-container">
 
-<script>
-const T = {
-  ar: {
-    logoTitle:'مخطط اجتماعات الكشافة', logoSub:'منظّم الاجتماع الأسبوعي',
-    mobileTitle:'مخطط اجتماعات الكشافة',
-    'lbl-troop':'اسم الفوج / المجموعة','lbl-leader':'اسم القائد',
-    'lbl-date':'التاريخ','lbl-day':'اليوم',
-    'lbl-location':'مكان الاجتماع','lbl-theme':'موضوع الاجتماع',
-    'lbl-preparedBy':'أعدّه',
-    'lbl-summary':'ملخّص','lbl-totalAct':'عدد الأنشطة',
-    'lbl-totalDur':'المدة الكلية','lbl-start':'وقت البداية','lbl-end':'وقت النهاية',
-    'lbl-generate':'إنشاء الجدول','lbl-clear':'مسح الكل',
-    'lbl-pageTitle':'خطّط اجتماعك',
-    'lbl-pageSub':'أضف الأنشطة، رتّبها بالسحب، ثم اضغط «إنشاء الجدول»',
-    'lbl-emptyText':'لا توجد أنشطة بعد','lbl-emptySub':'اضغط «إضافة نشاط» لتبدأ',
-    btnAdd:'+ إضافة نشاط',
-    days:['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'],
-    types:['لعبة','تعليم','احتفالية','استراحة','أخرى'],
-    typeKeys:['game','learning','ceremony','break','other'],
-    f_actName:'اسم النشاط / اللعبة',f_resp:'المسؤول',
-    f_time:'الوقت',f_materials:'المستلزمات',f_notes:'ملاحظات / أهداف',
-    f_actPh:'مثال: لعبة العقد',f_respPh:'مثال: القائد أحمد',
-    f_matPh:'مثال: حبال، خرائط',f_notesPh:'مثال: تنمية روح الفريق',
-    min:'د',hrs:'س',
-    schBadge:'🏕 جدول اجتماع كشفي',schSection:'البرنامج',
-    th:['الوقت','النشاط','المسؤول','المستلزمات','الملاحظات / الأهداف'],
-    infoTotal:'المدة الكلية',infoStart:'البداية',infoEnd:'النهاية',infoCount:'الأنشطة',
-    sigLabel:'توقيع القائد',genLabel:'أعدّه',
-    btnBack:'→ العودة للتعديل',   /* RTL: arrow points right = "back" */
-    btnPdf:'💾 حفظ كـ PDF',
-    btnCopy:'📋 نسخ كنص',
-    months:['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],
-    confirmClear:'هل تريد مسح كل شيء؟',copiedMsg:'✅ تم النسخ!',noData:'لم تُضف أي أنشطة.',
-    pdfTip:'سيفتح حوار الطباعة — اختر «حفظ كـ PDF»، وتأكد من تفعيل «رسوم الخلفية» للألوان الكاملة.',
-  },
-  en: {
-    logoTitle:'Scout Meeting Scheduler',logoSub:'Weekly Meeting Planner',
-    mobileTitle:'Scout Planner',
-    'lbl-troop':'Troop / Group Name','lbl-leader':'Leader Name',
-    'lbl-date':'Date','lbl-day':'Day',
-    'lbl-location':'Meeting Location','lbl-theme':'Meeting Theme',
-    'lbl-preparedBy':'Prepared By',
-    'lbl-summary':'Summary','lbl-totalAct':'Total activities',
-    'lbl-totalDur':'Total duration','lbl-start':'Start time','lbl-end':'End time',
-    'lbl-generate':'Generate Schedule','lbl-clear':'Clear all',
-    'lbl-pageTitle':'Plan Your Meeting',
-    'lbl-pageSub':'Add activities, drag to reorder, then click "Generate Schedule"',
-    'lbl-emptyText':'No activities yet','lbl-emptySub':'Click "Add Activity" to start',
-    btnAdd:'+ Add Activity',
-    days:['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-    types:['Game','Learning','Ceremony','Break','Other'],
-    typeKeys:['game','learning','ceremony','break','other'],
-    f_actName:'Activity / Game Name',f_resp:'Responsible Person',
-    f_time:'Time Slot',f_materials:'Materials Needed',f_notes:'Notes / Objectives',
-    f_actPh:'e.g. Knot-tying challenge',f_respPh:'e.g. Leader Nour',
-    f_matPh:'e.g. rope, maps',f_notesPh:'e.g. Build teamwork skills',
-    min:'min',hrs:'hr',
-    schBadge:'🏕 Scout Meeting Schedule',schSection:'Programme',
-    th:['Time','Activity','Responsible','Materials','Notes / Objectives'],
-    infoTotal:'Total duration',infoStart:'Start',infoEnd:'End',infoCount:'Activities',
-    sigLabel:"Leader's signature",genLabel:'Prepared by',
-    btnBack:'← Back to editor',
-    btnPdf:'💾 Save as PDF',
-    btnCopy:'📋 Copy as text',
-    months:['January','February','March','April','May','June','July','August','September','October','November','December'],
-    confirmClear:'Clear all activities and fields?',copiedMsg:'✅ Copied!',noData:'No activities were added.',
-    pdfTip:'The print dialog will open — choose "Save as PDF" and enable "Background graphics" for full colours.',
-  }
-};
+            <a href="#home" class="logo">
+                salah<span>.dev</span>
+            </a>
 
-let lang = 'ar';
-let activities = [];
-let idCounter = 0;
+            <ul class="nav-links">
 
-// ── PERSIST ──
-const STORAGE_KEY = 'scout-planner-v3';
-function saveState() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({
-      lang, activities, idCounter,
-      meta: {
-        troop:v('troop'),leader:v('leader'),meetDate:v('meetDate'),
-        meetDay:v('meetDay'),location:v('location'),theme:v('theme'),preparedBy:v('preparedBy')
-      }
-    }));
-  } catch(e){}
-}
-function loadState() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if(!raw) return false;
-    const s = JSON.parse(raw);
-    lang = s.lang||'ar';
-    activities = s.activities||[];
-    idCounter = s.idCounter||activities.length;
-    return s.meta||null;
-  } catch(e){ return false; }
-}
-function v(id){ const el=document.getElementById(id); return el?el.value:''; }
-function setV(id,val){ const el=document.getElementById(id); if(el&&val!==undefined) el.value=val; }
-function saveAndUpdate(){ saveState(); updateSummary(); }
+                <li>
+                    <a href="#about">About</a>
+                </li>
 
-// ── MOBILE ──
-function openMobileSidebar(){
-  document.getElementById('sidebar').classList.add('mobile-open');
-  document.getElementById('mobileOverlay').classList.add('open');
-}
-function closeMobileSidebar(){
-  document.getElementById('sidebar').classList.remove('mobile-open');
-  document.getElementById('mobileOverlay').classList.remove('open');
-}
+                <li>
+                    <a href="#skills">Skills</a>
+                </li>
 
-// ── LANGUAGE ──
-function setLang(l) {
-  lang = l;
-  const html = document.documentElement;
-  html.setAttribute('lang',l);
-  html.setAttribute('dir',l==='ar'?'rtl':'ltr');
-  document.getElementById('btnAr').classList.toggle('active',l==='ar');
-  document.getElementById('btnEn').classList.toggle('active',l==='en');
-  const t = T[l];
-  document.getElementById('logoTitle').textContent = t.logoTitle;
-  document.getElementById('logoSub').textContent = t.logoSub;
-  const mlt = document.getElementById('mobileLogoTitle');
-  if(mlt) mlt.textContent = t.mobileTitle;
-  ['lbl-troop','lbl-leader','lbl-date','lbl-day','lbl-location','lbl-theme','lbl-preparedBy',
-   'lbl-summary','lbl-totalAct','lbl-totalDur','lbl-start','lbl-end','lbl-pageTitle','lbl-pageSub'].forEach(id=>{
-    const el=document.getElementById(id); if(el) el.textContent=t[id];
-  });
-  document.getElementById('lbl-generate').textContent = t['lbl-generate'];
-  document.getElementById('lbl-clear').textContent = t['lbl-clear'];
-  document.getElementById('btnAdd').textContent = t.btnAdd;
-  buildDaySelect();
-  renderActivities();
-  updateSummary();
-  saveState();
-}
+                <li>
+                    <a href="#projects">Projects</a>
+                </li>
 
-function buildDaySelect(savedVal) {
-  const sel = document.getElementById('meetDay');
-  const cur = savedVal!==undefined ? savedVal : sel.value;
-  sel.innerHTML = `<option value=""></option>` + T[lang].days.map(d=>`<option value="${d}">${d}</option>`).join('');
-  if(cur) sel.value = cur;
-}
+                <li>
+                    <a href="#experience">Experience</a>
+                </li>
 
-// ── ACTIVITIES ──
-function addActivity(data) {
-  const id = idCounter++;
-  activities.push({
-    id, startTime:data?.startTime||'', endTime:data?.endTime||'',
-    name:data?.name||'', type:data?.type||'',
-    responsible:data?.responsible||'', materials:data?.materials||'', notes:data?.notes||''
-  });
-  renderActivities();
-  saveAndUpdate();
-  setTimeout(()=>{const cards=document.querySelectorAll('.activity-card');if(cards.length)cards[cards.length-1].scrollIntoView({behavior:'smooth',block:'nearest'});},50);
-}
+                <li>
+                    <a href="#contact" class="nav-button">
+                        Contact
+                    </a>
+                </li>
 
-function removeActivity(id) {
-  activities = activities.filter(a=>a.id!==id);
-  renderActivities(); saveAndUpdate();
-}
+            </ul>
 
-function updateField(id, field, val) {
-  const a = activities.find(a=>a.id===id);
-  if(a){ a[field]=val; saveAndUpdate(); }
-}
-
-function setType(id, typeKey) {
-  const a = activities.find(a=>a.id===id);
-  if(!a) return;
-  a.type = a.type===typeKey?'':typeKey;
-  renderActivities(); saveAndUpdate();
-}
-
-function calcDuration(s,e) {
-  if(!s||!e) return null;
-  const [sh,sm]=s.split(':').map(Number),[eh,em]=e.split(':').map(Number);
-  const d=(eh*60+em)-(sh*60+sm);
-  return d>0?d:null;
-}
-function fmtDuration(min) {
-  if(!min) return '';
-  const t=T[lang];
-  if(min<60) return min+' '+t.min;
-  const h=Math.floor(min/60),m=min%60;
-  return h+t.hrs+(m?` ${m}${t.min}`:'');
-}
-function fmt12(val24){
-  if(!val24) return '';
-  const {h,m,ampm}=parse24(val24);
-  return `${h}:${String(m).padStart(2,'0')} ${ampm}`;
-}
-function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
-function typeLabel(key){ const idx=T[lang].typeKeys.indexOf(key); return idx>=0?T[lang].types[idx]:key; }
-
-// ── TIME PICKER ──
-function parse24(val){
-  if(!val) return {h:null,m:0,ampm:'AM'};
-  const [hh,mm]=val.split(':').map(Number);
-  const ampm=hh>=12?'PM':'AM';
-  const h12=hh===0?12:hh>12?hh-12:hh;
-  return {h:h12,m:mm,ampm};
-}
-function to24(h,m,ampm){
-  let hh=parseInt(h);
-  if(ampm==='AM'&&hh===12) hh=0;
-  else if(ampm==='PM'&&hh!==12) hh+=12;
-  return `${String(hh).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
-}
-function buildTimePicker(id,slot,val24){
-  const {h,m,ampm}=parse24(val24);
-  const hrs=Array.from({length:12},(_,i)=>i+1);
-  const mins=['00','05','10','15','20','25','30','35','40','45','50','55'];
-  const hOpts=hrs.map(v=>`<option value="${v}" ${h===v?'selected':''}>${v}</option>`).join('');
-  const mOpts=mins.map(v=>`<option value="${v}" ${m===parseInt(v)&&val24?'selected':''}>${v}</option>`).join('');
-  return `<div class="time-picker" id="tp-${id}-${slot}">
-    <select class="tp-select" onchange="tpChange(${id},'${slot}')" id="tph-${id}-${slot}">${hOpts}</select>
-    <span class="tp-colon">:</span>
-    <select class="tp-select" style="width:36px" onchange="tpChange(${id},'${slot}')" id="tpm-${id}-${slot}">${mOpts}</select>
-    <div class="tp-ampm">
-      <button class="tp-ampm-btn ${ampm==='AM'?'active':''}" onclick="tpAmpm(${id},'${slot}','AM')">AM</button>
-      <button class="tp-ampm-btn ${ampm==='PM'?'active':''}" onclick="tpAmpm(${id},'${slot}','PM')">PM</button>
-    </div>
-  </div>`;
-}
-function tpChange(id,slot){
-  const h=document.getElementById(`tph-${id}-${slot}`).value;
-  const m=document.getElementById(`tpm-${id}-${slot}`).value;
-  const activeBtn=document.querySelector(`#tp-${id}-${slot} .tp-ampm-btn.active`);
-  const ampm=activeBtn?activeBtn.textContent:'AM';
-  const val=to24(h,m,ampm);
-  const field=slot==='start'?'startTime':'endTime';
-  updateField(id,field,val);
-  refreshTimeBadge(id);
-}
-function tpAmpm(id,slot,val){
-  const h=document.getElementById(`tph-${id}-${slot}`).value;
-  const m=document.getElementById(`tpm-${id}-${slot}`).value;
-  const field=slot==='start'?'startTime':'endTime';
-  updateField(id,field,to24(h,m,val));
-  document.querySelectorAll(`#tp-${id}-${slot} .tp-ampm-btn`).forEach(btn=>{
-    btn.classList.toggle('active',btn.textContent===val);
-  });
-  refreshTimeBadge(id);
-}
-function refreshTimeBadge(id){
-  const a=activities.find(a=>a.id===id);
-  if(!a) return;
-  const dur=calcDuration(a.startTime,a.endTime);
-  const badge=document.querySelector(`#card-${id} .card-time-badge`);
-  const header=document.querySelector(`#card-${id} .card-header`);
-  const badgeText=`${fmt12(a.startTime)||''}${a.endTime?' – '+fmt12(a.endTime):''} ${dur?'· '+fmtDuration(dur):''}`.trim();
-  if(badge){ badge.textContent=badgeText; }
-  else if(a.startTime&&header){
-    const b=document.createElement('div');
-    b.className='card-time-badge';
-    b.textContent=badgeText;
-    header.insertBefore(b,header.querySelector('.card-remove'));
-  }
-  updateSummary();
-}
-
-function renderActivities() {
-  const list = document.getElementById('activitiesList');
-  const t = T[lang];
-  if(activities.length===0){
-    list.innerHTML=`<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">${t['lbl-emptyText']}</div><div class="empty-sub">${t['lbl-emptySub']}</div></div>`;
-    return;
-  }
-  list.innerHTML = activities.map((a,i)=>{
-    const dur=calcDuration(a.startTime,a.endTime);
-    return `
-    <div class="activity-card" id="card-${a.id}" draggable="true"
-         ondragstart="dragStart(event,${a.id})" ondragover="dragOver(event,${a.id})"
-         ondrop="drop(event,${a.id})" ondragleave="dragLeave(event,${a.id})" ondragend="dragEnd(event)">
-      <div class="card-header">
-        <div class="card-drag">⠿</div>
-        <div class="card-num">${i+1}</div>
-        <div class="card-title-text">${a.name?esc(a.name):'<span style="color:#aaa;font-weight:400">…</span>'}</div>
-        ${a.startTime?`<div class="card-time-badge">${fmt12(a.startTime)}${a.endTime?' – '+fmt12(a.endTime):''} ${dur?'· '+fmtDuration(dur):''}</div>`:''}
-        <button class="card-remove" onclick="removeActivity(${a.id})">×</button>
-      </div>
-      <div class="type-row">
-        ${t.types.map((tp,ti)=>`<div class="type-chip ${a.type===t.typeKeys[ti]?'active-'+t.typeKeys[ti]:''}" onclick="setType(${a.id},'${t.typeKeys[ti]}')">${tp}</div>`).join('')}
-      </div>
-      <div class="card-body">
-        <div class="input-group">
-          <label class="input-label">${t.f_actName}</label>
-          <input class="input-field" type="text" value="${esc(a.name)}" placeholder="${t.f_actPh}" oninput="updateField(${a.id},'name',this.value);updateCardTitle(${a.id},this.value)"/>
         </div>
-        <div class="input-group">
-          <label class="input-label">${t.f_resp}</label>
-          <input class="input-field" type="text" value="${esc(a.responsible)}" placeholder="${t.f_respPh}" oninput="updateField(${a.id},'responsible',this.value)"/>
+
+    </nav>
+
+
+    <!-- =========================================================
+         HERO
+    ========================================================== -->
+
+    <section id="home">
+
+        <div class="container hero">
+
+            <div>
+
+                <div class="terminal-label">
+                    computer_engineer
+                </div>
+
+                <h1>
+                    Building systems.<br>
+                    <span>Securing what matters.</span>
+                </h1>
+
+                <p class="hero-description">
+                    I'm Salah, a Computer Engineering student specializing
+                    in Systems & Networks Engineering, with a strong interest
+                    in cybersecurity, infrastructure, cloud technologies and
+                    secure system architecture.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="#projects" class="btn btn-primary">
+                        View My Projects
+                    </a>
+
+                    <a href="#contact" class="btn btn-secondary">
+                        Get In Touch
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Terminal -->
+
+            <div class="terminal">
+
+                <div class="terminal-header">
+
+                    <div class="terminal-dot"></div>
+                    <div class="terminal-dot"></div>
+                    <div class="terminal-dot"></div>
+
+                    <span class="terminal-title">
+                        salah@portfolio:~
+                    </span>
+
+                </div>
+
+                <div class="terminal-body">
+
+                    <div class="terminal-line">
+                        <span class="terminal-command">$ whoami</span>
+                    </div>
+
+                    <div class="terminal-line">
+                        salah
+                    </div>
+
+                    <br>
+
+                    <div class="terminal-line">
+                        <span class="terminal-command">$ cat role.txt</span>
+                    </div>
+
+                    <div class="terminal-line">
+                        <span class="terminal-value">
+                            Computer Engineer
+                        </span>
+                    </div>
+
+                    <br>
+
+                    <div class="terminal-line">
+                        <span class="terminal-command">$ cat focus.txt</span>
+                    </div>
+
+                    <div class="terminal-line">
+                        Systems & Networks
+                    </div>
+
+                    <div class="terminal-line">
+                        Cybersecurity
+                    </div>
+
+                    <div class="terminal-line">
+                        Cloud & Infrastructure
+                    </div>
+
+                    <br>
+
+                    <div class="terminal-line">
+                        <span class="terminal-command">$ status</span>
+                    </div>
+
+                    <div class="terminal-line">
+                        <span style="color:#22c55e;">
+                            ● learning & building
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-        <div class="input-group full-col">
-          <label class="input-label">${t.f_time}</label>
-          <div class="time-row">
-            ${buildTimePicker(a.id,'start',a.startTime)}
-            <span class="time-sep"></span>
-            ${buildTimePicker(a.id,'end',a.endTime)}
-          </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         ABOUT
+    ========================================================== -->
+
+    <section id="about">
+
+        <div class="container">
+
+            <div class="section-header">
+
+                <div class="section-number">
+                    01 / ABOUT
+                </div>
+
+                <h2>
+                    More than just code.
+                </h2>
+
+                <p>
+                    My focus is on understanding how complete systems work,
+                    how they communicate, and how they can be protected.
+                </p>
+
+            </div>
+
+
+            <div class="about-grid">
+
+                <div class="about-text">
+
+                    <p>
+                        I am a Computer Engineering student currently
+                        completing my Bachelor of Engineering, specializing
+                        in Systems and Networks Engineering.
+                    </p>
+
+                    <p>
+                        My interests sit at the intersection of
+                        cybersecurity, networking, Linux systems,
+                        infrastructure, cloud computing and secure
+                        architecture.
+                    </p>
+
+                    <p>
+                        I enjoy working on projects where the challenge is
+                        not only to build an application, but to understand
+                        the infrastructure behind it and make the entire
+                        system reliable and secure.
+                    </p>
+
+                    <div class="about-highlight">
+
+                        My approach is simple:
+                        <strong>
+                            understand the system first,
+                            then secure it.
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stats">
+
+                    <div class="stat-card">
+
+                        <h3>BE</h3>
+
+                        <p>
+                            Computer Engineering
+                        </p>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <h3>Sys</h3>
+
+                        <p>
+                            Systems & Networks
+                        </p>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <h3>Sec</h3>
+
+                        <p>
+                            Cybersecurity Focus
+                        </p>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <h3>∞</h3>
+
+                        <p>
+                            Always Learning
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-        <div class="input-group">
-          <label class="input-label">${t.f_materials}</label>
-          <input class="input-field" type="text" value="${esc(a.materials)}" placeholder="${t.f_matPh}" oninput="updateField(${a.id},'materials',this.value)"/>
+
+    </section>
+
+
+    <!-- =========================================================
+         SKILLS
+    ========================================================== -->
+
+    <section id="skills">
+
+        <div class="container">
+
+            <div class="section-header">
+
+                <div class="section-number">
+                    02 / SKILLS
+                </div>
+
+                <h2>
+                    Technical toolkit.
+                </h2>
+
+                <p>
+                    Technologies and concepts I've worked with through
+                    university projects, labs and practical experimentation.
+                </p>
+
+            </div>
+
+
+            <div class="skills-grid">
+
+
+                <!-- Systems -->
+
+                <div class="skill-card">
+
+                    <div class="skill-icon">
+                        🖥️
+                    </div>
+
+                    <h3>
+                        Systems Engineering
+                    </h3>
+
+                    <p>
+                        Operating systems, Linux administration,
+                        processes, scheduling, virtualization and
+                        system-level programming.
+                    </p>
+
+                    <div class="tags">
+
+                        <span class="tag">Linux</span>
+                        <span class="tag">Ubuntu</span>
+                        <span class="tag">C</span>
+                        <span class="tag">VMware</span>
+                        <span class="tag">VirtualBox</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Cybersecurity -->
+
+                <div class="skill-card">
+
+                    <div class="skill-icon">
+                        🔐
+                    </div>
+
+                    <h3>
+                        Cybersecurity
+                    </h3>
+
+                    <p>
+                        Security analysis, network security, threat
+                        modeling, malware concepts, authentication,
+                        encryption and defensive security.
+                    </p>
+
+                    <div class="tags">
+
+                        <span class="tag">MITRE ATT&CK</span>
+                        <span class="tag">Security</span>
+                        <span class="tag">GRC</span>
+                        <span class="tag">Malware</span>
+                        <span class="tag">IAM</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Networking -->
+
+                <div class="skill-card">
+
+                    <div class="skill-icon">
+                        🌐
+                    </div>
+
+                    <h3>
+                        Networking
+                    </h3>
+
+                    <p>
+                        Network architecture, routing, firewalls,
+                        VLANs, VPNs, DNS, DHCP and infrastructure
+                        troubleshooting.
+                    </p>
+
+                    <div class="tags">
+
+                        <span class="tag">TCP/IP</span>
+                        <span class="tag">VLAN</span>
+                        <span class="tag">VPN</span>
+                        <span class="tag">pfSense</span>
+                        <span class="tag">DNS</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Cloud -->
+
+                <div class="skill-card">
+
+                    <div class="skill-icon">
+                        ☁️
+                    </div>
+
+                    <h3>
+                        Cloud & Azure
+                    </h3>
+
+                    <p>
+                        Cloud-based architectures, data pipelines,
+                        Azure services, machine learning workflows
+                        and cloud application infrastructure.
+                    </p>
+
+                    <div class="tags">
+
+                        <span class="tag">Azure</span>
+                        <span class="tag">IoT Hub</span>
+                        <span class="tag">Azure ML</span>
+                        <span class="tag">SQL</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DevOps -->
+
+                <div class="skill-card">
+
+                    <div class="skill-icon">
+                        ⚙️
+                    </div>
+
+                    <h3>
+                        Infrastructure & DevOps
+                    </h3>
+
+                    <p>
+                        Containerized environments, virtualization,
+                        Kubernetes concepts, replication, backups
+                        and resilient architectures.
+                    </p>
+
+                    <div class="tags">
+
+                        <span class="tag">Docker</span>
+                        <span class="tag">Kubernetes</span>
+                        <span class="tag">Git</span>
+                        <span class="tag">VMware</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Development -->
+
+                <div class="skill-card">
+
+                    <div class="skill-icon">
+                        💻
+                    </div>
+
+                    <h3>
+                        Development
+                    </h3>
+
+                    <p>
+                        Software development for system-oriented
+                        projects, APIs, dashboards, automation and
+                        security experiments.
+                    </p>
+
+                    <div class="tags">
+
+                        <span class="tag">C</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">C#</span>
+                        <span class="tag">.NET</span>
+                        <span class="tag">HTML/CSS</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-        <div class="input-group full-col">
-          <label class="input-label">${t.f_notes}</label>
-          <input class="input-field" type="text" value="${esc(a.notes)}" placeholder="${t.f_notesPh}" oninput="updateField(${a.id},'notes',this.value)"/>
+
+    </section>
+
+
+    <!-- =========================================================
+         PROJECTS
+    ========================================================== -->
+
+    <section id="projects">
+
+        <div class="container">
+
+            <div class="section-header">
+
+                <div class="section-number">
+                    03 / PROJECTS
+                </div>
+
+                <h2>
+                    Things I've built.
+                </h2>
+
+                <p>
+                    A selection of academic, systems and cybersecurity
+                    projects I've worked on.
+                </p>
+
+            </div>
+
+
+            <div class="projects-grid">
+
+
+                <!-- Traffic -->
+
+                <div class="project-card">
+
+                    <div class="project-number">
+                        PROJECT_01
+                    </div>
+
+                    <h3>
+                        Smart Traffic Congestion Prediction
+                    </h3>
+
+                    <p>
+                        A cloud-based intelligent traffic monitoring and
+                        prediction system that processes vehicle telemetry
+                        and predicts whether a road zone will become
+                        congested within the next 10 minutes.
+                    </p>
+
+                    <div class="project-tech">
+
+                        <span class="tag">Azure IoT Hub</span>
+                        <span class="tag">Azure ML</span>
+                        <span class="tag">Azure SQL</span>
+                        <span class="tag">Data Lake</span>
+                        <span class="tag">.NET</span>
+                        <span class="tag">Machine Learning</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FYP -->
+
+                <div class="project-card">
+
+                    <div class="project-number">
+                        PROJECT_02
+                    </div>
+
+                    <h3>
+                        Secure Emergency Response Architecture
+                    </h3>
+
+                    <p>
+                        A final-year Computer Engineering project focused
+                        on designing a secure and resilient emergency
+                        response platform connecting emergency reports
+                        with ambulance and EMS services.
+                    </p>
+
+                    <div class="project-tech">
+
+                        <span class="tag">Kubernetes</span>
+                        <span class="tag">Security</span>
+                        <span class="tag">MFA</span>
+                        <span class="tag">Encryption</span>
+                        <span class="tag">Replication</span>
+                        <span class="tag">Backup</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Malware -->
+
+                <div class="project-card">
+
+                    <div class="project-number">
+                        PROJECT_03
+                    </div>
+
+                    <h3>
+                        AI-Assisted Malware Detection Lab
+                    </h3>
+
+                    <p>
+                        A controlled cybersecurity laboratory demonstrating
+                        malware behavior simulation and machine-learning-based
+                        classification. The environment focuses on defensive
+                        analysis rather than real malware deployment.
+                    </p>
+
+                    <div class="project-tech">
+
+                        <span class="tag">Python</span>
+                        <span class="tag">Linux</span>
+                        <span class="tag">Scikit-learn</span>
+                        <span class="tag">Cybersecurity</span>
+                        <span class="tag">AI</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Network Lab -->
+
+                <div class="project-card">
+
+                    <div class="project-number">
+                        PROJECT_04
+                    </div>
+
+                    <h3>
+                        Virtual Network Security Lab
+                    </h3>
+
+                    <p>
+                        A virtualized networking environment used to
+                        experiment with firewalls, routing, VLANs,
+                        authentication, Linux servers, Active Directory,
+                        mail infrastructure and VPN connectivity.
+                    </p>
+
+                    <div class="project-tech">
+
+                        <span class="tag">pfSense</span>
+                        <span class="tag">Ubuntu</span>
+                        <span class="tag">Windows Server</span>
+                        <span class="tag">LDAP</span>
+                        <span class="tag">WireGuard</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- OS -->
+
+                <div class="project-card">
+
+                    <div class="project-number">
+                        PROJECT_05
+                    </div>
+
+                    <h3>
+                        Linux Process & Scheduling Labs
+                    </h3>
+
+                    <p>
+                        System programming experiments involving process
+                        creation, parent-child relationships, scheduling
+                        policies and Linux kernel concepts.
+                    </p>
+
+                    <div class="project-tech">
+
+                        <span class="tag">C</span>
+                        <span class="tag">Linux</span>
+                        <span class="tag">fork()</span>
+                        <span class="tag">wait()</span>
+                        <span class="tag">SCHED_FIFO</span>
+                        <span class="tag">SCHED_RR</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Kernel -->
+
+                <div class="project-card">
+
+                    <div class="project-number">
+                        PROJECT_06
+                    </div>
+
+                    <h3>
+                        Linux Kernel Module
+                    </h3>
+
+                    <p>
+                        A low-level Linux kernel programming exercise
+                        demonstrating module initialization, cleanup,
+                        kernel logging and Makefile-based compilation.
+                    </p>
+
+                    <div class="project-tech">
+
+                        <span class="tag">Linux Kernel</span>
+                        <span class="tag">C</span>
+                        <span class="tag">Makefile</span>
+                        <span class="tag">Kernel Modules</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-      </div>
-    </div>`;
-  }).join('');
-  setupTouchDrag();
-}
 
-function updateCardTitle(id,val){
-  const el=document.querySelector(`#card-${id} .card-title-text`);
-  if(el) el.innerHTML=val?esc(val):'<span style="color:#aaa;font-weight:400">…</span>';
-}
+    </section>
 
-function updateSummary(){
-  document.getElementById('statCount').textContent=activities.length;
-  const totalMin=activities.reduce((acc,a)=>{const d=calcDuration(a.startTime,a.endTime);return acc+(d||0);},0);
-  const starts=activities.filter(a=>a.startTime).map(a=>a.startTime).sort();
-  const ends=activities.filter(a=>a.endTime).map(a=>a.endTime).sort();
-  document.getElementById('statDuration').textContent=totalMin?fmtDuration(totalMin):'—';
-  document.getElementById('statStart').textContent=starts.length?fmt12(starts[0]):'—';
-  document.getElementById('statEnd').textContent=ends.length?fmt12(ends[ends.length-1]):'—';
-}
 
-// ── DRAG & DROP ──
-let dragId = null;
-function dragStart(e,id){ dragId=id; e.dataTransfer.effectAllowed='move'; setTimeout(()=>{const c=document.getElementById('card-'+id);if(c)c.classList.add('dragging');},0); }
-function dragOver(e,id){ e.preventDefault(); e.dataTransfer.dropEffect='move'; document.querySelectorAll('.activity-card').forEach(c=>c.classList.remove('drag-over')); const c=document.getElementById('card-'+id); if(c&&id!==dragId)c.classList.add('drag-over'); }
-function dragLeave(e,id){ const c=document.getElementById('card-'+id); if(c)c.classList.remove('drag-over'); }
-function drop(e,targetId){ e.preventDefault(); if(dragId===null||dragId===targetId)return; const fi=activities.findIndex(a=>a.id===dragId),ti=activities.findIndex(a=>a.id===targetId); if(fi<0||ti<0)return; const[item]=activities.splice(fi,1); activities.splice(ti,0,item); dragId=null; renderActivities(); saveAndUpdate(); }
-function dragEnd(e){ dragId=null; document.querySelectorAll('.activity-card').forEach(c=>c.classList.remove('dragging','drag-over')); }
+    <!-- =========================================================
+         EXPERIENCE
+    ========================================================== -->
 
-// ── TOUCH DRAG ──
-function setupTouchDrag() {
-  document.querySelectorAll('.activity-card').forEach(card => {
-    const handle = card.querySelector('.card-drag');
-    if(!handle) return;
-    let startY, clone, placeholder;
-    handle.addEventListener('touchstart', e=>{
-      e.preventDefault();
-      const id=parseInt(card.id.split('-')[1]);
-      startY=e.touches[0].clientY;
-      clone=card.cloneNode(true);
-      clone.style.cssText=`position:fixed;left:${card.getBoundingClientRect().left}px;top:${card.getBoundingClientRect().top}px;width:${card.offsetWidth}px;opacity:.85;z-index:999;pointer-events:none;box-shadow:0 8px 32px rgba(0,0,0,.2);`;
-      document.body.appendChild(clone);
-      placeholder=document.createElement('div');
-      placeholder.className='drop-placeholder';
-      card.parentNode.insertBefore(placeholder,card);
-      card.style.display='none';
-    },{passive:false});
-    handle.addEventListener('touchmove',e=>{
-      e.preventDefault();
-      const dy=e.touches[0].clientY-startY;
-      clone.style.top=(parseFloat(clone.style.top)+dy)+'px';
-      startY=e.touches[0].clientY;
-      const ty=e.touches[0].clientY;
-      const all=[...document.querySelectorAll('.activity-card:not([style*="display: none"])')];
-      let tc=null;
-      all.forEach(c=>{ const r=c.getBoundingClientRect(); if(ty>=r.top&&ty<=r.bottom)tc=c; });
-      if(tc){ const r=tc.getBoundingClientRect(); if(ty<r.top+r.height/2)tc.parentNode.insertBefore(placeholder,tc); else tc.parentNode.insertBefore(placeholder,tc.nextSibling); }
-    },{passive:false});
-    handle.addEventListener('touchend',e=>{
-      const id=parseInt(card.id.split('-')[1]);
-      const fi=activities.findIndex(a=>a.id===id);
-      let count=0;
-      [...placeholder.parentNode.children].forEach((el,i)=>{ const ph=[...placeholder.parentNode.children].indexOf(placeholder); if(i<ph&&el.classList&&el.classList.contains('activity-card')&&el.style.display!=='none')count++; });
-      if(fi<count)count--;
-      clone.remove(); placeholder.remove(); card.style.display='';
-      if(count!==fi&&count>=0&&count<activities.length){ const[item]=activities.splice(fi,1); activities.splice(count,0,item); }
-      renderActivities(); saveAndUpdate();
-    });
-  });
-}
+    <section id="experience">
 
-// ── GENERATE ──
-function fmtDate(d){
-  if(!d) return '';
-  const[y,m,day]=d.split('-');
-  return `${parseInt(day)} ${T[lang].months[parseInt(m)-1]} ${y}`;
-}
+        <div class="container">
 
-function generateSchedule(){
-  const t=T[lang];
-  const meta={
-    troop:v('troop'),leader:v('leader'),date:v('meetDate'),
-    day:v('meetDay'),location:v('location'),theme:v('theme'),preparedBy:v('preparedBy'),
-  };
-  const starts=activities.filter(a=>a.startTime).map(a=>a.startTime).sort();
-  const ends=activities.filter(a=>a.endTime).map(a=>a.endTime).sort();
-  const totalMin=activities.reduce((acc,a)=>{const d=calcDuration(a.startTime,a.endTime);return acc+(d||0);},0);
+            <div class="section-header">
 
-  const rows=activities.map(a=>{
-    const dur=calcDuration(a.startTime,a.endTime);
-    const mats=(a.materials||'').split(',').map(s=>s.trim()).filter(Boolean);
-    return `<tr>
-      <td><div class="time-col">${fmt12(a.startTime)||'—'}</div>${a.endTime?`<div class="time-col" style="color:#aaa">→ ${fmt12(a.endTime)}</div>`:''}${dur?`<div class="dur-tag">${fmtDuration(dur)}</div>`:''}</td>
-      <td><div class="act-name">${esc(a.name)||'—'}${a.type?`<span class="act-pill pill-${a.type}">${typeLabel(a.type)}</span>`:''}</div></td>
-      <td style="font-size:12.5px;color:var(--text2)">${esc(a.responsible)||'—'}</td>
-      <td>${mats.length?mats.map(m=>`<span class="mat-tag">${esc(m)}</span>`).join(''):'<span style="color:#aaa">—</span>'}</td>
-      <td><div class="notes-td">${esc(a.notes)||'—'}</div></td>
-    </tr>`;
-  }).join('');
+                <div class="section-number">
+                    04 / EXPERIENCE
+                </div>
 
-  const generated=new Date().toLocaleDateString(lang==='ar'?'ar-LB':'en-GB',{day:'numeric',month:'long',year:'numeric'});
+                <h2>
+                    Experience & growth.
+                </h2>
 
-  document.getElementById('scheduleCard').innerHTML=`
-  <div class="schedule-card" id="printArea" dir="${lang==='ar'?'rtl':'ltr'}" lang="${lang}">
-    <div class="sch-header">
-      <div class="sch-badge">${t.schBadge}</div>
-      <div class="sch-title">${esc(meta.troop)||'—'}</div>
-      ${meta.theme?`<div class="sch-subtitle">🎯 ${esc(meta.theme)}</div>`:''}
-      <div class="sch-meta-row">
-        ${(meta.day||meta.date)?`<div class="sch-meta-item">📅 <strong>${[meta.day,fmtDate(meta.date)].filter(Boolean).join(' · ')}</strong></div>`:''}
-        ${meta.location?`<div class="sch-meta-item">📍 <strong>${esc(meta.location)}</strong></div>`:''}
-        ${meta.leader?`<div class="sch-meta-item">👤 <strong>${esc(meta.leader)}</strong></div>`:''}
-      </div>
-    </div>
-    ${(totalMin||starts.length)?`<div class="sch-info-strip">
-      ${totalMin?`<div class="sch-info-item">${t.infoTotal}: <b>${fmtDuration(totalMin)}</b></div>`:''}
-      ${starts.length?`<div class="sch-info-item">${t.infoStart}: <b>${fmt12(starts[0])}</b></div>`:''}
-      ${ends.length?`<div class="sch-info-item">${t.infoEnd}: <b>${fmt12(ends[ends.length-1])}</b></div>`:''}
-      <div class="sch-info-item">${t.infoCount}: <b>${activities.length}</b></div>
-    </div>`:''}
-    <div class="sch-body">
-      <div class="sch-section-title">${t.schSection}</div>
-      ${activities.length===0?`<p style="text-align:center;color:#aaa;padding:2rem">${t.noData}</p>`:`
-      <table class="sch-table">
-        <thead><tr>${t.th.map(h=>`<th>${h}</th>`).join('')}</tr></thead>
-        <tbody>${rows}</tbody>
-      </table>`}
-      <div class="sch-footer">
-        <div><div class="sig-line">${t.sigLabel}</div><div class="sig-blank"></div></div>
-        <div class="footer-note">${meta.preparedBy?`${t.genLabel}: <strong>${esc(meta.preparedBy)}</strong> · `:''}${generated}</div>
-      </div>
-    </div>
-  </div>`;
+                <p>
+                    Building practical experience alongside my engineering
+                    studies.
+                </p>
 
-  /* ── FIX 3: PDF-only button, no WhatsApp ── */
-  document.getElementById('outputActions').innerHTML=`
-    <button class="btn-action" onclick="backToEdit()">${t.btnBack}</button>
-    <button class="btn-action primary" onclick="savePdf()">${t.btnPdf}</button>
-    <button class="btn-action" onclick="copyAsText()">${t.btnCopy}</button>
-  `;
+            </div>
 
-  document.getElementById('editorSection').style.display='none';
-  const out=document.getElementById('scheduleOutput');
-  out.classList.add('visible');
-  window.scrollTo({top:0,behavior:'smooth'});
-  closeMobileSidebar();
-}
 
-/* ── FIX 4: savePdf — shows tip then triggers print-to-PDF ── */
-function savePdf(){
-  const t=T[lang];
-  // Small non-blocking tip overlay
-  const tip=document.createElement('div');
-  tip.style.cssText='position:fixed;bottom:1.5rem;inset-inline-start:50%;transform:translateX(-50%);background:#0d2340;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;z-index:9999;max-width:90vw;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.3);font-family:var(--font-body)';
-  tip.textContent=t.pdfTip;
-  document.body.appendChild(tip);
-  setTimeout(()=>{ tip.remove(); },5000);
-  setTimeout(()=>{ window.print(); },300);
-}
+            <div class="timeline">
 
-function backToEdit(){
-  document.getElementById('scheduleOutput').classList.remove('visible');
-  document.getElementById('editorSection').style.display='';
-}
 
-// ── COPY AS TEXT ──
-function copyAsText(){
-  const t=T[lang];
-  const meta={troop:v('troop'),leader:v('leader'),date:fmtDate(v('meetDate')),day:v('meetDay'),location:v('location'),theme:v('theme')};
-  let txt=`📋 ${t.schBadge}\n${'─'.repeat(35)}\n`;
-  if(meta.troop) txt+=`🏕 ${meta.troop}\n`;
-  if(meta.leader) txt+=`👤 ${meta.leader}\n`;
-  if(meta.day||meta.date) txt+=`📅 ${[meta.day,meta.date].filter(Boolean).join(' · ')}\n`;
-  if(meta.location) txt+=`📍 ${meta.location}\n`;
-  if(meta.theme) txt+=`🎯 ${meta.theme}\n`;
-  txt+='\n';
-  activities.forEach((a,i)=>{
-    txt+=`${i+1}. ${a.name||'—'}\n`;
-    if(a.startTime||a.endTime) txt+=`   ⏰ ${[fmt12(a.startTime),fmt12(a.endTime)].filter(Boolean).join(' → ')}\n`;
-    if(a.responsible) txt+=`   👤 ${a.responsible}\n`;
-    if(a.materials) txt+=`   🎒 ${a.materials}\n`;
-    if(a.notes) txt+=`   📝 ${a.notes}\n`;
-    txt+='\n';
-  });
-  txt+=`${'─'.repeat(35)}\n${new Date().toLocaleDateString()}`;
-  navigator.clipboard.writeText(txt).then(()=>alert(t.copiedMsg)).catch(()=>prompt('',txt));
-}
+                <div class="timeline-item">
 
-function clearAll(){
-  if(!confirm(T[lang].confirmClear)) return;
-  activities=[]; idCounter=0;
-  ['troop','leader','meetDate','meetDay','location','theme','preparedBy'].forEach(id=>setV(id,''));
-  renderActivities(); saveAndUpdate(); backToEdit();
-}
+                    <div class="timeline-dot"></div>
 
-// ── INIT ──
-(function init(){
-  const meta=loadState();
-  const html=document.documentElement;
-  html.setAttribute('lang',lang);
-  html.setAttribute('dir',lang==='ar'?'rtl':'ltr');
-  document.getElementById('btnAr').classList.toggle('active',lang==='ar');
-  document.getElementById('btnEn').classList.toggle('active',lang==='en');
-  const t=T[lang];
-  document.getElementById('logoTitle').textContent=t.logoTitle;
-  document.getElementById('logoSub').textContent=t.logoSub;
-  const mlt=document.getElementById('mobileLogoTitle');
-  if(mlt) mlt.textContent=t.mobileTitle;
-  ['lbl-troop','lbl-leader','lbl-date','lbl-day','lbl-location','lbl-theme','lbl-preparedBy',
-   'lbl-summary','lbl-totalAct','lbl-totalDur','lbl-start','lbl-end','lbl-pageTitle','lbl-pageSub'].forEach(id=>{
-    const el=document.getElementById(id); if(el) el.textContent=t[id];
-  });
-  document.getElementById('lbl-generate').textContent=t['lbl-generate'];
-  document.getElementById('lbl-clear').textContent=t['lbl-clear'];
-  document.getElementById('btnAdd').textContent=t.btnAdd;
-  buildDaySelect(meta?.meetDay||'');
-  if(meta){
-    setV('troop',meta.troop); setV('leader',meta.leader);
-    setV('meetDate',meta.meetDate); setV('location',meta.location);
-    setV('theme',meta.theme); setV('preparedBy',meta.preparedBy);
-  }
-  renderActivities();
-  updateSummary();
-})();
-</script>
+                    <div class="timeline-date">
+                        CURRENT
+                    </div>
+
+                    <h3>
+                        IT / Technical Experience
+                    </h3>
+
+                    <div class="timeline-company">
+                        Sodetel
+                    </div>
+
+                    <p>
+                        Working in a telecommunications and technology
+                        environment while developing practical experience
+                        with IT systems, networking, infrastructure and
+                        technical operations.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div class="timeline-date">
+                        PREVIOUS EXPERIENCE
+                    </div>
+
+                    <h3>
+                        Security Analyst Internship
+                    </h3>
+
+                    <div class="timeline-company">
+                        Central Bank of Lebanon
+                    </div>
+
+                    <p>
+                        Gained exposure to cybersecurity operations,
+                        security analysis and the practical challenges
+                        involved in protecting organizational systems.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div class="timeline-date">
+                        UNIVERSITY
+                    </div>
+
+                    <h3>
+                        Computer Engineering Projects
+                    </h3>
+
+                    <div class="timeline-company">
+                        Systems & Networks Engineering
+                    </div>
+
+                    <p>
+                        Developed projects and laboratory environments
+                        covering operating systems, networking, cloud
+                        computing, cybersecurity, machine learning and
+                        infrastructure.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         EDUCATION
+    ========================================================== -->
+
+    <section id="education">
+
+        <div class="container">
+
+            <div class="section-header">
+
+                <div class="section-number">
+                    05 / EDUCATION
+                </div>
+
+                <h2>
+                    Education.
+                </h2>
+
+            </div>
+
+
+            <div class="education-card">
+
+                <div class="education-icon">
+                    🎓
+                </div>
+
+                <div>
+
+                    <h3>
+                        Bachelor of Engineering in Computer Engineering
+                    </h3>
+
+                    <div class="university">
+                        Systems & Networks Engineering
+                    </div>
+
+                    <p>
+                        Currently completing my final year of Computer
+                        Engineering studies, with a particular focus on
+                        systems, networks, cybersecurity, cloud
+                        infrastructure and secure architecture.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         SECURITY PHILOSOPHY
+    ========================================================== -->
+
+    <section>
+
+        <div class="container">
+
+            <div class="security-box">
+
+                <div>
+
+                    <div class="section-number">
+                        ENGINEERING_MINDSET
+                    </div>
+
+                    <h3>
+                        Security isn't an add-on.
+                    </h3>
+
+                    <p>
+                        I believe security should be considered from the
+                        architecture stage rather than added after a
+                        system is already built.
+                    </p>
+
+                    <p style="margin-top:15px;">
+                        That's why my projects combine software with
+                        infrastructure, networking, authentication,
+                        encryption, resilience and monitoring.
+                    </p>
+
+                </div>
+
+
+                <div class="security-list">
+
+                    <div>
+                        <span>✓</span>
+                        Secure Architecture
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        Network Segmentation
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        Authentication & MFA
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        Encryption
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        Backup & Replication
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        Monitoring & Detection
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         CONTACT
+    ========================================================== -->
+
+    <section id="contact">
+
+        <div class="container">
+
+            <div class="contact-box">
+
+                <div class="section-number">
+                    06 / CONTACT
+                </div>
+
+                <h2>
+                    Let's connect.
+                </h2>
+
+                <p>
+                    Interested in cybersecurity, systems engineering,
+                    networking, infrastructure or technology?
+                    Feel free to reach out.
+                </p>
+
+
+                <div class="contact-links">
+
+                    <!-- Replace these with your real links -->
+
+                    <a
+                        href="mailto:salah@salcorp.org"
+                        class="contact-link"
+                    >
+                        ✉ Email
+                    </a>
+
+                    <a
+                        href="https://github.com/Salaha1"
+                        target="_blank"
+                        class="contact-link"
+                    >
+                        GitHub
+                    </a>
+
+                    <a
+                        href="https://www.linkedin.com/in/salah-atallah-053253240/"
+                        target="_blank"
+                        class="contact-link"
+                    >
+                        LinkedIn
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
+
+    <footer>
+
+        <div class="container">
+
+            <p>
+                © <span id="year"></span> Salah.
+                Built with HTML, CSS & curiosity.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <script>
+
+        // Automatically update copyright year
+
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+
+
+        // Small navbar effect when scrolling
+
+        const nav = document.querySelector("nav");
+
+        window.addEventListener("scroll", () => {
+
+            if (window.scrollY > 30) {
+
+                nav.style.background =
+                    "rgba(7, 11, 20, 0.92)";
+
+            } else {
+
+                nav.style.background =
+                    "rgba(7, 11, 20, 0.75)";
+
+            }
+
+        });
+
+    </script>
+
 </body>
 </html>
